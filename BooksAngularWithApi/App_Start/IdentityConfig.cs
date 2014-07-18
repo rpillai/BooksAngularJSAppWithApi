@@ -19,6 +19,7 @@ namespace BooksAngularWithApi
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -29,10 +30,9 @@ namespace BooksAngularWithApi
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireLowercase = true
             };
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)

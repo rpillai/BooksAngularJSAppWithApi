@@ -1,12 +1,24 @@
-﻿<div>
-    <fieldset>
-        <form>
+﻿<div class="col-md-offset-4 col-md-6">
+    <form name="loginForm" ng-controller="LoginController" class="form-horizontal">
+        <fieldset>
+            <legend class="page-header">Login</legend>
             <div class="form-group">
-                <div class="col-md-3">
-                    <label class="control-label">Username:</label>
-                </div>
-                <div><input type="text" value="username" class="input-group" /></div>
+                <label for="email">Email</label>
+                <input type="text" name="email" ng-model="login.email" placeholder="Email" class="form-control" />
             </div>
-        </form>
-    </fieldset>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" ng-model="login.password" placeholder="Password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="Login(login)">Save</button>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-link" href="#/Register">Register</a>
+            </div>
+            <div>
+                <p class="text-info" ng-model="message"></p>
+            </div>
+        </fieldset>
+    </form>
 </div>

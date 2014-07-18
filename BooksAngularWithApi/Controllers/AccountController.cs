@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -401,9 +401,10 @@ namespace BooksAngularWithApi.Controllers
             {
                 if (result.Errors != null)
                 {
+                    var i = 0;
                     foreach (string error in result.Errors)
                     {
-                        ModelState.AddModelError("", error);
+                        ModelState.AddModelError("E" + i++, error);
                     }
                 }
 

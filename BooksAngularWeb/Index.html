@@ -6,46 +6,44 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/Site.css" rel="stylesheet" />
 </head>
-    <body ng-app="BooksApp">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../#/Home">Home</a></li>
-                        <li><a href="../#/Books">Books</a></li>
-                        <li><a href="../#/Login">Login</a></li>
-                        @*
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
-                    </ul>
-                </div>
+<body ng-app="BooksApp" ng-cloak>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">Book Store</a>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/Home">Home</a></li>
+                    <li><a href="#/Books">Books</a></li>
+                    <li><a href="#/Login">Login</a></li>
+                </ul>
             </div>
         </div>
-        <div class="container body-content" style="margin-top: 60px" ng-view>
-            
-        </div>
-        <hr />
-        
-        <footer>
-            <span class="glyphicon glyphicon-copyright-mark">Books Application</span>  
-        </footer>
-        <script type="text/javascript" src="Scripts/lib/angular/angular.js"></script>
-        <script type="text/javascript" src="Scripts/lib/angular/angular-route.js"></script>
-        <script type="text/javascript" src="Scripts/lib/jquery/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="Scripts/lib/bootstrap/bootstrap.js"></script>
-        <script type="text/javascript" src="Scripts/lib/modernizr/modernizr-2.6.2.js"></script>
-        <script type="text/javascript" src="Scripts/lib/respond/respond.js"></script>
-        
-        <script type="text/javascript" src="Scripts/app/app.js"></script>
-        <script type="text/javascript" src="Scripts/app/controller.js"></script>
-        <script type="text/javascript" src="Scripts/app/services.js"></script>
-    </body>
+    </div>
+    <div class="container body-content" style="margin-top: 60px" ng-view>
+
+    </div>
+    <hr />
+    <footer>
+        <span class="glyphicon glyphicon-copyright-mark">Books Application</span>
+    </footer>
+    <script type="text/javascript" src="Scripts/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="Scripts/lib/angular/angular-route.js"></script>
+    <script type="text/javascript" src="Scripts/lib/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="Scripts/lib/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="Scripts/lib/modernizr/modernizr-2.6.2.js"></script>
+    <script type="text/javascript" src="Scripts/lib/respond/respond.js"></script>
+
+    <script type="text/javascript" src="Scripts/app/app.js"></script>
+    <script type="text/javascript" src="Scripts/app/httpInterceptorService.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller.js"></script>
+    <script type="text/javascript" src="Scripts/app/services.js"></script>
+</body>
 </html>

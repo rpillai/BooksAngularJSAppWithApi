@@ -1,0 +1,30 @@
+﻿<div class="col-md-offset-4 col-md-4 panel panel-default panel-body">
+    <div class="col-xs-offset-1" ng-controller="RegisterController">
+        <form name="loginForm" ng-controller="RegisterController" class="form-horizontal">
+            <fieldset>
+                <legend class="page-header">Register</legend>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" ng-model="register.email" placeholder="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" ng-model="register.password" placeholder="Password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" name="confirmpassword" ng-model="register.confirmpassword" placeholder="Confirm Password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" ng-click="RegisterClick(loginForm)">Register</button>
+                </div>
+            </fieldset>
+            <div class="form-group" ng-show="message" ng-repeat="error in message">
+                <p class="text-danger">{{error}}</p>
+            </div>
+            <div>
+                <p class="text-info">{{successmessage}}</p>
+            </div>
+        </form>
+    </div>
+</div>

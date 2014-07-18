@@ -13,6 +13,7 @@ using BooksAngularWithApi.Models;
 
 namespace BooksAngularWithApi.Controllers
 {
+    [Authorize]
     public class BooksController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -102,6 +103,7 @@ namespace BooksAngularWithApi.Controllers
             return Ok(book);
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

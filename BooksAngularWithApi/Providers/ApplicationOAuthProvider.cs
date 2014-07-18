@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -46,7 +47,9 @@ namespace BooksAngularWithApi.Providers
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            
             context.Validated(ticket);
+
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 

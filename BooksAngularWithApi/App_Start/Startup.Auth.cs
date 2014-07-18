@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Cors;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -22,6 +25,9 @@ namespace BooksAngularWithApi
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            // Enable CORS
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+        
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
