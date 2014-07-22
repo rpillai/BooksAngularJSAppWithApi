@@ -28,11 +28,7 @@ var LoginController = BooksApp.controller('LoginController', [
     }
 ]);
 
-var BookController = BooksApp.controller('BookController', [
-        '$scope', function ($scope) {
 
-        }
-]);
 
 var RegisterController = BooksApp.controller('RegisterController', [
     '$scope', 'AccountService', function ($scope, AccountService) {

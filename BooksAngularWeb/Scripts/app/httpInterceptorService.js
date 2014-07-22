@@ -1,14 +1,13 @@
 ﻿'use strict';
 
-BooksApp.factory('httpInterceptorService', ['$q', '$cookieStore',
-    function ($q, $cookieStore) {
+BooksApp.factory('httpInterceptorService', ['$q', '$cookieStore','$location',
+    function ($q, $cookieStore,$location) {
 
         var _request = function (config) {
-            //var token = $cookieStore.get('AuthorisedToken');
+            var authorisedData = $cookieStore.get('AuthorisedData');
 
-            var token = '';
-            if(token)
-                config.headers.Authorisation = 'Bearer=' + token;
+            if (authorisedData)
+                config.headers.Authorization = 'Bearer ' + authorisedData.token;
             return config;
         };
 
@@ -22,7 +21,7 @@ BooksApp.factory('httpInterceptorService', ['$q', '$cookieStore',
 
         var _responseError = function(rejection) {
             if (rejection.status === 401) {
-                $location.path('/login');
+                $location.path('/Login');
             }
 
             return $q.reject(rejection);

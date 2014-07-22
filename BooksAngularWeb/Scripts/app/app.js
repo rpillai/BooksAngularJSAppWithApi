@@ -1,12 +1,11 @@
 ﻿'use strict';
 
-var BooksApp = angular.module('BooksApp', ['ngRoute']);
+var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies','ui.bootstrap']);
 
-BooksApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-
+BooksApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/Books', {
-            controller: 'bookController',
+            controller: 'BookController',
             templateUrl: 'PartialViews/books.html'
         })
         .when('/Login', {
@@ -19,9 +18,13 @@ BooksApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $h
         }).otherwise({
             redirectTo: '/'
         });
-
-    //$httpProvider.interceptors.push('');
-    //$httpProvider.interceptors.push('httpInterceptorService');
 }]);
+
+
+BooksApp.config([
+    '$httpProvider', function($httpProvider) {
+        $httpProvider.interceptors.push('httpInterceptorService');
+    }
+]);
 
 

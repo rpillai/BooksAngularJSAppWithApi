@@ -1,3 +1,74 @@
-﻿<div>
-    Books Page.
+﻿<div class="row" ng-controller="BookController">
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Available Books</h1>
+            </div>
+            <div class="col-sm-offset-0 panel-body">
+                <table class="table table-responsive table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Book in Books" class="animated lightSpeedIn">
+                            <td>
+                                <a href="" ng-click="GetBookDetails(Book.id)"><strong>{{Book.title}}</strong></a>
+                            </td>
+                            <td>{{Book.price}}</td>
+                            <td>{{Book.genre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <tabset ng-controller="BookController" ng-show="Book">
+            <tab>
+                <tab-heading>
+                    <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
+                </tab-heading>
+                <ul class="media-list" style="height: 200px">
+                    <li class="media" ng-repeat="Review in Book.reviews">
+                        <div class="media-body">
+                            <blockquote>
+                                <p class="small">&quot;{{Review.comment}}&quot;</p>
+                                <h6 class="text-muted">{{Review.userName}}</h6>
+                            </blockquote>
+                        </div>
+                    </li>
+                </ul>
+            </tab>
+            <tab active="tab.active" disabled="tab.disabled">
+                <tab-heading>
+                    <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
+                </tab-heading>
+                <br />
+                <div class="col-md-11 col-md-push-1">
+                    <form class="form-horizontal" ng-controller="BookController">
+                        <fieldset>
+                            <div class="form-group">
+                                <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    <h6 class="small">More Details</h6>
+                </tab-heading>
+                I've got an HTML heading, and a select callback. Pretty cool!
+            </tab>
+        </tabset>
+    </div>
+
 </div>

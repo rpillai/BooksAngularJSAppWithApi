@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BooksAngularWithApi.Models;
+using Microsoft.Ajax.Utilities;
+using WebGrease.Css.Extensions;
 
 namespace BooksAngularWithApi.Controllers
 {
@@ -21,18 +24,40 @@ namespace BooksAngularWithApi.Controllers
         // GET: api/Books
         public IQueryable<Book> GetBooks()
         {
-            return db.Books.Include(b=> b.Author);
+            return db.Books.Include(b => b.Author).Include(b => b.Reviews);
         }
 
         // GET: api/Books/5
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookReviewModel))]
         public async Task<IHttpActionResult> GetBook(int id)
         {
-            Book book = await db.Books.FindAsync(id);
+            var book =
+                await
+                    db.Books.Include(br => br.Reviews.Select(r => r.User))
+                        .Include(ba => ba.Author)
+                        .Select(b1 => new BookReviewModel
+                        {
+                            Id = b1.Id,
+                            AuthorName = b1.Author.Name,
+                            Reviews = b1.Reviews.Select(r => new ReviewUserModel
+                            {
+                                Comment = r.Comment,
+                                UserName = r.User.UserName
+                            }),
+                            Genre = b1.Genre,
+                            Title = b1.Title,
+                            Year = b1.Year
+                        })
+                        .Where(b => b.Id == id)
+                        .FirstOrDefaultAsync();
+
+
             if (book == null)
             {
                 return NotFound();
             }
+
+
 
             return Ok(book);
         }
@@ -103,7 +128,7 @@ namespace BooksAngularWithApi.Controllers
             return Ok(book);
         }
 
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

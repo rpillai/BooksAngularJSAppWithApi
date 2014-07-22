@@ -7,13 +7,13 @@ namespace BooksAngularWithApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialiseDataBase : IMigrationMetadata
+    public sealed partial class Initialise : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialiseDataBase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialise));
         
         string IMigrationMetadata.Id
         {
-            get { return "201407160359373_InitialiseDataBase"; }
+            get { return "201407210716065_Initialise"; }
         }
         
         string IMigrationMetadata.Source

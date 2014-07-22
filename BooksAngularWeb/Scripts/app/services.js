@@ -1,7 +1,13 @@
 ﻿'use strict';
 
-var AccountService = BooksApp.factory('AccountService', ['$http',
-    function($http) {
+var AccountService = BooksApp.factory('AccountService', ['$http','$cookieStore',
+    function ($http, $cookieStore) {
+
+        var _authData = {
+            isAuth: false,
+            userName: "",
+            token: ""
+        };
 
         var Register = function(email, password) {
             return $http(
@@ -34,8 +40,16 @@ var AccountService = BooksApp.factory('AccountService', ['$http',
                         'content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     }
             }
-            ).then(function(response) {
+            ).then(function (response) {
+
+                _authData.isAuth = true;
+                _authData.token = response.data.access_token;
+                _authData.userName = response.data.userName;
+
+                $cookieStore.put('AuthorisedData', _authData);
+                    
                 return response;
+                
             }, function(error) {
                 return error;
             });

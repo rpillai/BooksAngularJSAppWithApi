@@ -1,5 +1,10 @@
 using System.Collections.Generic;
+using System.Net.Mime;
+using System.Threading;
+using System.Web.UI;
 using BooksAngularWithApi.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BooksAngularWithApi.Migrations
 {
@@ -8,7 +13,7 @@ namespace BooksAngularWithApi.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BooksAngularWithApi.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -16,8 +21,28 @@ namespace BooksAngularWithApi.Migrations
             ContextKey = "BooksAngularWithApi.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(BooksAngularWithApi.Models.ApplicationDbContext context)
+
+        
+        protected override void Seed(ApplicationDbContext context)
         {
+
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            var newUser = userManager.FindByName("ramesh.pillai@gmail.com");
+
+
+
+            if (newUser == null)
+            {
+                newUser = new ApplicationUser
+                {
+                    Email = "ramesh.pillai@gmail.com",
+                    UserName = "ramesh.pillai@gmail.com"
+                };
+
+                userManager.Create(newUser, "password1");
+            }
+
             context.Authors.AddOrUpdate(a => a.Name,
                     new Author { Id = 1, Name = "Jane Austen" },
                     new Author { Id = 2, Name = "Charles Dickens" },
@@ -30,6 +55,15 @@ namespace BooksAngularWithApi.Migrations
                     new Book { Id = 3, Title = "David Copperfield", Year = 1850, AuthorId = 2, Price = 15m, Genre = "Bildungsroman" },
                     new Book { Id = 4, Title = "Don Quixote", Year = 1617, AuthorId = 3, Price = 8.95m, Genre = "Picaresque" }
                 );
+
+            context.Reviews.AddOrUpdate(x => x.Id,
+                new Review { BookId = 1, Comment = "This is a awesome book", UserID = newUser.Id },
+                new Review { BookId = 2, Comment = "This is a awesome book 2", UserID = newUser.Id },
+                new Review { BookId = 3, Comment = "This is a awesome book 3", UserID = newUser.Id },
+                new Review { BookId = 1, Comment = "This is a awesome book 1.1", UserID = newUser.Id },
+                new Review { BookId = 2, Comment = "This is a awesome book 2.1", UserID = newUser.Id },
+                new Review { BookId = 3, Comment = "This is a awesome book 3.1", UserID = newUser.Id },
+                new Review { BookId = 3, Comment = "This is a awesome book 3.2", UserID = newUser.Id });
 
             //  This method will be called after migrating to the latest version.
 
