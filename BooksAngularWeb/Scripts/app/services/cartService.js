@@ -18,9 +18,23 @@
             }
 
             var _removeItem = function (id) {
-                angular.forEach(cartItems, function (value, key) {
-
+                var itemIndex = -1;
+                angular.forEach(cartItems, function (value, index) {
+                    if (value.Id === id) {
+                        itemIndex = index;
+                    }
                 });
+
+                if (itemIndex > -1) {
+                    cartItems.splice(itemIndex, 1);
+                }
+
+                broadCastChanges(cartItems);
+            }
+
+            var _clearCart = function () {
+                cartItems = [];
+
                 broadCastChanges(cartItems);
             }
 
@@ -31,6 +45,7 @@
             return {
                 AddItem: _addItemToCart,
                 RemoveItem: _removeItem,
+                ClearCart : _clearCart,
                 CartItems : cartItems
             }
         }

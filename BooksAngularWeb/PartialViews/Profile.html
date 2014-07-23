@@ -1,0 +1,37 @@
+﻿<div class="col-md-6">
+    <tabset ng-controller="ProfileController">
+        <tab>
+            <tab-heading>
+                Change Password
+            </tab-heading>
+            <div class="col-md-6 center-block" >
+                <form class="form-horizontal" novalidate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="currentpassword">Current Password</label>
+                            <input type="text" value="" required ng-model="currentpassword" placeholder="Current Password" autofocus class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="newpassword" class="control-label">New Password</label>
+                            <input type="text" required ng-model="newpassword" class="form-control" placeholder="New Password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="newpassword" class="control-label">Confirm Password</label>
+                            <input type="text" required ng-model="confirmpassword" class="form-control" placeholder="Confirm Password" />
+                        </div>
+                        <div class="col-md-offset-0">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-sm" ng-click="ChangePassword()">Change Password</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </tab>
+        <tab>
+            <tab-heading>
+                Update Profile
+            </tab-heading>
+        </tab>
+    </tabset>
+</div>

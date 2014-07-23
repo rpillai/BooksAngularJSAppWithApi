@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -76,10 +77,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\animate.css" />
+    <Content Include="PartialViews\author.html" />
+    <Content Include="PartialViews\home.html" />
+    <Content Include="PartialViews\Profile.html" />
     <Content Include="PartialViews\Register.html" />
+    <Content Include="Scripts\app\controller\indexController.js" />
+    <Content Include="Scripts\app\controller\loginController.js" />
+    <Content Include="Scripts\app\controller\profileController.js" />
+    <Content Include="Scripts\app\controller\registerController.js" />
+    <Content Include="Scripts\app\directives\simpledirective.js" />
     <Content Include="PartialViews\ViewCart.html" />
-    <Content Include="Scripts\app\BookDetailController.js" />
-    <Content Include="Scripts\app\CartController.js" />
+    <Content Include="Scripts\app\controller\BookDetailController.js" />
+    <Content Include="Scripts\app\controller\CartController.js" />
     <Content Include="Scripts\app\services\cartService.js" />
     <Content Include="Scripts\app\services\reviewService.js" />
     <Content Include="Scripts\CartController.js" />
@@ -87,9 +96,9 @@
     <Content Include="Scripts\lib\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\lib\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\lib\angular-ui\ui-bootstrap.min.js" />
-    <Content Include="Scripts\app\BooksController.js" />
-    <Content Include="Scripts\app\BookService.js" />
-    <Content Include="Scripts\app\httpInterceptorService.js" />
+    <Content Include="Scripts\app\controller\BooksController.js" />
+    <Content Include="Scripts\app\services\BookService.js" />
+    <Content Include="Scripts\app\services\httpInterceptorService.js" />
     <Content Include="Scripts\lib\angular\angular-animate.min.js.map" />
     <Content Include="Scripts\lib\angular\angular-cookies.min.js.map" />
     <Content Include="Scripts\lib\angular\angular-loader.min.js.map" />
@@ -118,8 +127,7 @@
     <Content Include="Index.html" />
     <Content Include="PartialViews\Login.html" />
     <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\controller.js" />
-    <Content Include="Scripts\app\services.js" />
+    <Content Include="Scripts\app\services\accountServices.js" />
     <Content Include="Scripts\lib\angular\angular-animate.js" />
     <Content Include="Scripts\lib\angular\angular-animate.min.js" />
     <Content Include="Scripts\lib\angular\angular-cookies.js" />

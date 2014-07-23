@@ -13,8 +13,12 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             templateUrl: 'PartialViews/Login.html'
         })
         .when('/Register', {
-            conroller: 'RegisterController',
+            controller: 'RegisterController',
             templateUrl : 'PartialViews/Register.html'
+        })
+        .when('/Profile', {
+            controller: 'ProfileController',
+            templateUrl : 'PartialViews/Profile.html'
         })
         .when('/ViewCart', {
             conroller: 'RegisterController',
@@ -27,6 +31,9 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
     //$locationProvider.html5Mode(true);
 }]);
 
+BooksApp.run(['AccountService', function (AccountService) {
+    AccountService.FillAuthData();
+}]);
 
 BooksApp.config([
     '$httpProvider', function($httpProvider) {

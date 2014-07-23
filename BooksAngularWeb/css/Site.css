@@ -42,6 +42,10 @@ footer {
     margin: 10px;
 }
 
+.tab-content form{
+    padding-left:20px;
+}
+
 .dl-horizontal dt {
     width: auto;
 }

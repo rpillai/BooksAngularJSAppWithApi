@@ -26,7 +26,7 @@
                     <li><a href="#/Books">Books</a></li>
                     <li><a href="#/Authors">Authors</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" role="login" ng-controller="LoginController">
+                <form class="navbar-form navbar-right" role="login" ng-controller="LoginController" ng-hide="AuthData.isAuth">
                     <div class="form-group">
                         <input type="text" class="form-control input-sm" placeholder="Email" ng-model="login.email" required>
                     </div>
@@ -35,16 +35,21 @@
                     </div>
                     <button type="submit" class="btn btn-default btn-sm" ng-click="Login(login)">Submit</button>
                 </form>
-                <div >
+                <ul class="nav navbar-nav navbar-right" ng-controller="IndexController" ng-show="AuthData.isAuth">
+                    <li> <p class="navbar-text"><a ng-href="#/Profile" class="navbar-link">{{AuthData.userName}}</a></p></li>
+                    <li class="nav nav-divider"></li>
+                    <li><a ng-href="" ng-click="Logout()">Logout</a></li>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
                     <div class="" ng-controller="CartController">
-                        <p class="navbar-text"><a ng-href="#/ViewCart">Cart Items :<span class="badge">{{count}}</span></a></p>
+                        <p class="navbar-text"><a ng-href="#/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span>  Items :<span class="badge">{{count}}</span></a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container body-content" style="margin-top: 60px" ng-view>
-        
+
     </div>
     <div class="container">
         <footer>
@@ -63,13 +68,21 @@
     <script type="text/javascript" src="Scripts/lib/respond/respond.js"></script>
 
     <script type="text/javascript" src="Scripts/app/app.js"></script>
-    <script type="text/javascript" src="Scripts/app/httpInterceptorService.js"></script>
-    <script type="text/javascript" src="Scripts/app/services.js"></script>
+
+    <!-- services-->
+    <script type="text/javascript" src="Scripts/app/services/httpInterceptorService.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/accountServices.js"></script>
     <script type="text/javascript" src="Scripts/app/services/reviewService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/cartService.js"></script>
-    <script type="text/javascript" src="Scripts/app/BookService.js"></script>
-    <script type="text/javascript" src="Scripts/app/controller.js"></script>
-    <script type="text/javascript" src="Scripts/app/BooksController.js"></script>
-    <script type="text/javascript" src="Scripts/app/CartController.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/bookService.js"></script>
+
+    <!-- controllers -->
+    <script type="text/javascript" src="Scripts/app/controller/loginController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/registerController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/indexController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/profileController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/BookDetailController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/BooksController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/CartController.js"></script>
 </body>
 </html>
