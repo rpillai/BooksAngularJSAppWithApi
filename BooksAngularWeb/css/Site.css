@@ -30,9 +30,22 @@ textarea {
 
 
 footer {
-    height: 68px;
+    display: block;
+    height: 60px;
     position: absolute;
     bottom: 0px;
     border-top: 1px;
 }
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.tab-content {
+    margin: 10px;
+}
+
+.dl-horizontal dt {
+    width: auto;
+}
+
+.dl-horizontal dd {
+    margin-left: 75px;
+}

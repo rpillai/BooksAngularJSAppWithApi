@@ -1,74 +1,100 @@
-﻿<div class="row" ng-controller="BookController">
-    <div class="col-sm-6 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h1 class="panel-title">Available Books</h1>
-            </div>
-            <div class="col-sm-offset-0 panel-body">
-                <table class="table table-responsive table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Genre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="Book in Books" class="animated lightSpeedIn">
-                            <td>
-                                <a href="" ng-click="GetBookDetails(Book.id)"><strong>{{Book.title}}</strong></a>
-                            </td>
-                            <td>{{Book.price}}</td>
-                            <td>{{Book.genre}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+﻿<div class="row">
+    <div ng-controller="BookController" ng-repeat="Book in Books" class="animated lightSpeedIn" ng-init="Index = $index">
+        <div class="col-xs-4 col-sm- col-md-4 media" style="padding-bottom: 15px;margin-top: 15px">
+            <a href="" ng-click="GetBookDetails(Book.id)" class="pull-left">
+                <img class="img-responsive img-rounded media-object " ng-src="http://lorempixel.com/120/120/nature/{{Index}}" alt="" />
+            </a>
+            <div class="media-body">
+                <div class="media-heading">
+                    <h5><small><strong class="text-primary">{{Book.title}}</strong></small></h5>
+                </div>
+                <p class="text-danger small">
+                    {{Book.price | currency}}
+                    <button type="button" class="btn btn-xs btn-primary" ng-click="AddToCart(Book)">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        Buy
+                    </button>
+                </p>
+                <p style="margin-left:2px" class="text-muted small"> {{Book.author.name}}</p>
             </div>
         </div>
     </div>
-
-    <div class="col-md-4">
-        <tabset ng-controller="BookController" ng-show="Book">
-            <tab>
-                <tab-heading>
-                    <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
-                </tab-heading>
-                <ul class="media-list" style="height: 200px">
-                    <li class="media" ng-repeat="Review in Book.reviews">
-                        <div class="media-body">
-                            <blockquote>
-                                <p class="small">&quot;{{Review.comment}}&quot;</p>
-                                <h6 class="text-muted">{{Review.userName}}</h6>
-                            </blockquote>
-                        </div>
-                    </li>
-                </ul>
-            </tab>
-            <tab active="tab.active" disabled="tab.disabled">
-                <tab-heading>
-                    <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
-                </tab-heading>
-                <br />
-                <div class="col-md-11 col-md-push-1">
-                    <form class="form-horizontal" ng-controller="BookController">
-                        <fieldset>
-                            <div class="form-group">
-                                <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </tab>
-            <tab>
-                <tab-heading>
-                    <h6 class="small">More Details</h6>
-                </tab-heading>
-                I've got an HTML heading, and a select callback. Pretty cool!
-            </tab>
-        </tabset>
-    </div>
-
 </div>
+
+<div class="row" ng-controller="BookDetailController">
+    <tabset ng-controller="BookDetailController" ng-show="Book">
+        <tab>
+            <tab-heading>
+                <h6 class="small">More Details</h6>
+            </tab-heading>
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="media">
+                        <div class="media-object pull-left">
+                            <img ng-src="http://placehold.it/250x250/" alt="Book Image" class="img-responsive img-rounded pull-left" />
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{Book.title}}</h4>
+                            <p class="text-muted">
+                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit,
+                                vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                            </p>
+                        </div>
+                        <div>
+                            <dl class="dl-horizontal pull-left">
+                                <dt>Price  :</dt>
+                                <dd class="text-danger">{{Book.price  | currency}}</dd>
+                                <dt>Year  :</dt>
+                                <dd>{{Book.year }}</dd>
+                                <dt>Author :</dt>
+                                <dd>{{Book.authorName}}</dd>
+                                <dt>Genre : </dt>
+                                <dd>{{Book.genre}}</dd>
+                            </dl>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    Buy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab>
+            <tab-heading>
+                <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
+            </tab-heading>
+            <ul class="media-list" style="height: 200px">
+                <li class="media" ng-repeat="Review in Book.reviews">
+                    <div class="media-body">
+                        <blockquote>
+                            <p class="small">&quot;{{Review.comment}}&quot;</p>
+                            <h6 class="text-muted">{{Review.userName}}</h6>
+                        </blockquote>
+                    </div>
+                </li>
+            </ul>
+        </tab>
+        <tab active="tab.active" disabled="tab.disabled">
+            <tab-heading>
+                <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
+            </tab-heading>
+            <br />
+            <div class="col-md-11 col-md-push-1">
+                <form class="form-horizontal" ng-controller="BookDetailController">
+                    <fieldset>
+                        <div class="form-group">
+                            <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </tab>
+    </tabset>
+</div>
+

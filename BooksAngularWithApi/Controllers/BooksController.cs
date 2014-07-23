@@ -44,6 +44,7 @@ namespace BooksAngularWithApi.Controllers
                                 Comment = r.Comment,
                                 UserName = r.User.UserName
                             }),
+                            Price = b1.Price,
                             Genre = b1.Genre,
                             Title = b1.Title,
                             Year = b1.Year

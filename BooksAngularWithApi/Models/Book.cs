@@ -30,6 +30,7 @@ namespace BooksAngularWithApi.Models
         public int Year { get; set; }
         public string Genre { get; set; }
         public string AuthorName { get; set; }
+        public decimal Price { get; set; }
 
         public IEnumerable<ReviewUserModel> Reviews { get; set; }
     }

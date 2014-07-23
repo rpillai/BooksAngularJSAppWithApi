@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store - Angular JS</title>
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -20,29 +22,29 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/Home">Home</a></li>
+                    <li><a href="#/Home" class="hidden-xs hidden-sm">Home</a></li>
                     <li><a href="#/Books">Books</a></li>
                     <li><a href="#/Authors">Authors</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" role="login" ng-controller="LoginController">
-
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email" ng-model="login.email" required>
+                        <input type="text" class="form-control input-sm" placeholder="Email" ng-model="login.email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" ng-model="login.password" required>
+                        <input type="password" class="form-control input-sm" placeholder="Password" ng-model="login.password" required>
                     </div>
-                    <button type="submit" class="btn btn-default" ng-click="Login(login)">Submit</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="Login(login)">Submit</button>
                 </form>
-                <!--<ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/Login">Login</a></li>
-                </ul>-->
+                <div >
+                    <div class="" ng-controller="CartController">
+                        <p class="navbar-text"><a ng-href="#/ViewCart">Cart Items :<span class="badge">{{count}}</span></a></p>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
     <div class="container body-content" style="margin-top: 60px" ng-view>
-
+        
     </div>
     <div class="container">
         <footer>
@@ -64,8 +66,10 @@
     <script type="text/javascript" src="Scripts/app/httpInterceptorService.js"></script>
     <script type="text/javascript" src="Scripts/app/services.js"></script>
     <script type="text/javascript" src="Scripts/app/services/reviewService.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/cartService.js"></script>
     <script type="text/javascript" src="Scripts/app/BookService.js"></script>
     <script type="text/javascript" src="Scripts/app/controller.js"></script>
     <script type="text/javascript" src="Scripts/app/BooksController.js"></script>
+    <script type="text/javascript" src="Scripts/app/CartController.js"></script>
 </body>
 </html>
