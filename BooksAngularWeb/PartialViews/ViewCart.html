@@ -1,58 +1,116 @@
-﻿<div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 center-block well well-lg" ng-controller="CartController" ng-model="CartItems" >
-        <!--<table class="table table-condensed table-responsive table-striped">
-            <thead>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th></th>
-            </thead>
-            <tbody>-->
-        <div class="row" style="padding-bottom:15px">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right:1px;border-right-style:solid"><p class="text-center">Book Title</p></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-center">Price</p></div>
-            <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-center">Quantity</p></div>
-            <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-center">Total</p></div>
-            <div class="col-lg-1 col-md-1  col-sm-1 col-xs-1">
-                <button type="button" class="btn btn-danger btn-xs" ng-click="ClearCart()">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </button>
+﻿<div ng-controller="CartController">
+    <div class="row" ng-hide="CartItems.length === 0">
+        <div class="col-lg-7 col-md-7 col-md-push-2 center-block well well-lg" ng-model="CartItems">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6 col-sm-6">
+                        <h3>Shopping Cart Items</h3>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-sm-push-4 col-md-push-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Check Out</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row" style="padding-bottom:15px" ng-repeat="Item in CartItems">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right:1px;border-right-style:solid"><p> {{Item.Title}}</p></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-right">{{Item.Price | currency}}</p></div>
-            <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
-                <input class="form-control input-sm" type="text" ng-model="Item.Qty" ng-change="CalculateGrandTotal()" />
-            </div>
-            <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-right">{{(Item.Price * Item.Qty) | currency}}</p></div>
-            <div class="col-lg-1 col-md-1  col-sm-1 col-xs-1">
-                <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItem(Item.Id)">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-7 col-md-offset-7 col-md-2 col-sm-offset-7 col-sm-2 col-xs-offset-7 col-xs-2" style="border-right:1px;border-right-style:solid">
-                <p class="text-right">Grand Total</p>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
-                <p class="text-right">{{GrandTotal | currency}}</p>
-            </div>
-        </div>
-        <!--<tr>
-                    <td colspan="3" valign="middle" align="right"><strong>Total : </strong></td>
-                    <td>
-                        {{GrandTotal}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>-->
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-        Another side content
-    </div>
+            <table class="table table-hover table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th style="text-align: right;">Total</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Grand Total</strong></td>
+                        <td style="text-align: right;"><strong>{{GrandTotal | currency}}</strong></td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="Item in CartItems">
+                        <td style="width: 70%">{{Item.Title}}</td>
+                        <td style="width: 10%">{{Item.Price | currency}}</td>
+                        <td style="width: 10%"> <input class="form-control input-sm" style="horiz-align: right" type="text" ng-model="Item.Qty" ng-change="CalculateGrandTotal()" /></td>
+                        <td style="text-align: right;width: 10%">{{(Item.Price * Item.Qty) | currency}}</td>
+                        <td style="text-align: right;width: 5%">
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItem(Item.Id)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                            <td colspan="3"><p class="text-right">Grand Total</p></td>
+                            <td ><p class="text-right">{{GrandTotal | currency}}</p></td>
+                        </tr>-->
+                </tbody>
+            </table>
 
 
+            <!--<div class="row" style="padding-bottom:15px">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right:1px;border-right-style:solid">
+                        <div class="caption text-center">
+                            <h5>Book Title</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <div class="caption text-center">
+                            <h5>Price</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <div class="caption text-center">
+                            <h5>Quantity</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <div class="caption text-center">
+                            <h5>Total</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1  col-sm-1 col-xs-1">
+
+                    </div>
+                </div>
+
+                <div class="row" style="padding-bottom:15px" ng-repeat="Item in CartItems">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right:1px;border-right-style:solid"><p> {{Item.Title}}</p></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-right">{{Item.Price | currency}}</p></div>
+                    <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <input class="form-control input-sm" type="text" ng-model="Item.Qty" ng-change="CalculateGrandTotal()" />
+                    </div>
+                    <div class="col-lg-2 col-md-2  col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid"><p class="text-right">{{(Item.Price * Item.Qty) | currency}}</p></div>
+                    <div class="col-lg-1 col-md-1  col-sm-1 col-xs-1">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItem(Item.Id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-offset-7 col-md-offset-7 col-md-2 col-sm-offset-7 col-sm-2 col-xs-offset-7 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <p class="text-right">Grand Total</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-right:1px;border-right-style:solid">
+                        <p class="text-right">{{GrandTotal | currency}}</p>
+                    </div>
+                </div>-->
+        </div>
+        <!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Another side content
+        </div>-->
+    </div>
+
+    <div class="row" ng-controller="CartController" ng-show="CartItems.length === 0">
+        <div style="bottom: 75%;right: 50%;position:absolute;">
+            <div class="well-lg">
+                <div style="left: 50%;position: relative;top: 25%;">
+                    <p>Your cart is empty.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>

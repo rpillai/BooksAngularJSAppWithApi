@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore', '$rootScope',
-    function ($http, $cookieStore, $rootScope) {
+var AccountService = BooksApp.factory('AccountService', ['$http', 'CookieService', '$rootScope', 'AUTHKEY', 'CARTKEY',
+    function ($http, CookieService, $rootScope, AUTHKEY, CARTKEY) {
 
         var baseUrl = 'http://localhost:57212/api/Account/';
 
@@ -10,6 +10,8 @@ var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore'
             userName: "",
             token: ""
         };
+
+        var _cartItems = [];
 
         var _register = function (email, password) {
             return $http(
@@ -48,8 +50,7 @@ var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore'
                 _authData.token = response.data.access_token;
                 _authData.userName = response.data.userName;
 
-                $cookieStore.put('AuthorisedData', _authData);
-
+                CookieService.SetCookie(AUTHKEY, _authData);
                 $rootScope.$broadcast('OnSuccessLogin', _authData);
 
                 return response;
@@ -65,16 +66,19 @@ var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore'
                 'url': baseUrl + "/Logout",
                 'method': 'POST',
             }).then(function () {
-                $cookieStore.remove('AuthorisedData');
+
+                CookieService.ClearCookie();
+                //$cookieStore.remove('AuthorisedData');
 
                 _authData.isAuth = false;
-                _authData.userName = "";
-                _authData.token = ""
+                _authData.userName = {};
+                _authData.token = {}
             });
         }
 
         var fillAuthData = function () {
-            var authData = $cookieStore.get('AuthorisedData');
+
+            var authData = CookieService.GetCookie(AUTHKEY);
 
             if (authData) {
                 _authData.isAuth = authData.isAuth,
@@ -82,6 +86,7 @@ var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore'
                 _authData.token = authData.token
             };
 
+          
         }
 
         return {
@@ -89,7 +94,8 @@ var AccountService = BooksApp.factory('AccountService', ['$http', '$cookieStore'
             Login: _login,
             Logout: _logOut,
             FillAuthData: fillAuthData,
-            AuthData: _authData
+            AuthData: _authData,
+            CartItems: _cartItems
         }
 
     }

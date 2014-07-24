@@ -2,11 +2,12 @@
     <div ng-controller="BookController" ng-repeat="Book in Books" class="animated lightSpeedIn" ng-init="Index = $index">
         <div class="col-xs-4 col-sm- col-md-4 media" style="padding-bottom: 15px;margin-top: 15px">
             <a href="" ng-click="GetBookDetails(Book.id)" class="pull-left">
-                <img class="img-responsive img-rounded media-object " ng-src="http://lorempixel.com/120/120/nature/{{Index}}" alt="" />
+                <img src="http://placehold.it/120x120/" alt="{{Book.Title}}" class="img-responsive img-rounded media-object" />
+                <!--<img class="img-responsive img-rounded media-object " ng-src="http://lorempixel.com/120/120/nature/{{Index}}" alt="" />-->
             </a>
             <div class="media-body">
                 <div class="media-heading">
-                    <h5><small><strong class="text-primary">{{Book.title}}</strong></small></h5>
+                    <a ng-href="" ng-click="GetBookDetails(Book.id)"><p class="btn btn-link"><small><strong class="text-primary">{{Book.title}}</strong></small></p></a>
                 </div>
                 <p class="text-danger small">
                     {{Book.price | currency}}
@@ -67,12 +68,10 @@
                 <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
             </tab-heading>
             <ul class="media-list" style="height: 200px">
-                <li class="media" ng-repeat="Review in Book.reviews">
+                <li class="media" ng-repeat="Review in Book.reviews | limitTo : 4">
                     <div class="media-body">
-                        <blockquote>
                             <p class="small">&quot;{{Review.comment}}&quot;</p>
                             <h6 class="text-muted">{{Review.userName}}</h6>
-                        </blockquote>
                     </div>
                 </li>
             </ul>
@@ -82,7 +81,7 @@
                 <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
             </tab-heading>
             <br />
-            <div class="col-md-11 col-md-push-1">
+            <div class="col-md-8">
                 <form class="form-horizontal" ng-controller="BookDetailController">
                     <fieldset>
                         <div class="form-group">

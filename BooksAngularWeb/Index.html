@@ -6,6 +6,7 @@
     <title>Book Store - Angular JS</title>
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link href="css/Site.css" rel="stylesheet" />
     <link href="css/animate.css" rel="stylesheet" />
 </head>
@@ -37,12 +38,12 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right" ng-controller="IndexController" ng-show="AuthData.isAuth">
                     <li> <p class="navbar-text"><a ng-href="#/Profile" class="navbar-link">{{AuthData.userName}}</a></p></li>
-                    <li class="nav nav-divider"></li>
+                    <!--<li class="nav nav-divider"></li>-->
                     <li><a ng-href="" ng-click="Logout()">Logout</a></li>
                 </ul>
                 <div class="nav navbar-nav navbar-right">
                     <div class="" ng-controller="CartController">
-                        <p class="navbar-text"><a ng-href="#/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span>  Items :<span class="badge">{{count}}</span></a></p>
+                        <p class="navbar-text"><a ng-href="#/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span>  Items <span class="badge">{{count}}</span></a></p>
                     </div>
                 </div>
             </div>
@@ -75,6 +76,7 @@
     <script type="text/javascript" src="Scripts/app/services/reviewService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/cartService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/bookService.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/CookieService.js"></script>
 
     <!-- controllers -->
     <script type="text/javascript" src="Scripts/app/controller/loginController.js"></script>

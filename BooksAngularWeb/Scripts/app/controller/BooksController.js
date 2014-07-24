@@ -21,13 +21,13 @@
             });
         };
 
-        $scope.$on('$viewContentLoaded', function () {
-            LoadBookData();
-        });
-
         $scope.AddToCart = function(book) {
             CartService.AddItem(book.id,book.title,1, book.price);
         };
+
+        $scope.$on('$viewContentLoaded', function () {
+            LoadBookData();
+        });
     }]);
 
     var BookDetailController = BooksApp.controller('BookDetailController', [

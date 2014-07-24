@@ -21,8 +21,11 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             templateUrl : 'PartialViews/Profile.html'
         })
         .when('/ViewCart', {
-            conroller: 'RegisterController',
+            controller: 'CartController',
             templateUrl: 'PartialViews/ViewCart.html'
+        })
+        .when('/', {
+          templateUrl : 'PartialViews/Home.html'  
         })
         .otherwise({
             redirectTo: '/'
@@ -31,8 +34,12 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
     //$locationProvider.html5Mode(true);
 }]);
 
-BooksApp.run(['AccountService', function (AccountService) {
-    AccountService.FillAuthData();
+BooksApp.run(['AccountService', function (accountService) {
+    accountService.FillAuthData();
+}]);
+
+BooksApp.run(['CartService', function (cartService) {
+    cartService.FillCartData();
 }]);
 
 BooksApp.config([
@@ -40,5 +47,8 @@ BooksApp.config([
         $httpProvider.interceptors.push('httpInterceptorService');
     }
 ]);
+
+BooksApp.constant('AUTHKEY', 'AuthorisationData');
+BooksApp.constant('CARTKEY', 'CartKey');
 
 

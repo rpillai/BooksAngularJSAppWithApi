@@ -1,10 +1,11 @@
 ﻿'use strict';
 
-BooksApp.factory('httpInterceptorService', ['$q', '$cookieStore','$location',
-    function ($q, $cookieStore,$location) {
+BooksApp.factory('httpInterceptorService', [
+    '$q', 'CookieService', '$location', 'AUTHKEY',
+    function ($q, CookieService, $location, AUTHKEY) {
 
         var _request = function (config) {
-            var authorisedData = $cookieStore.get('AuthorisedData');
+            var authorisedData = CookieService.GetCookie(AUTHKEY);
 
             if (authorisedData)
                 config.headers.Authorization = 'Bearer ' + authorisedData.token;
