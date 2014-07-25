@@ -7,12 +7,8 @@
             $scope.Books = response.data;
         };
 
-        var onGetBookError = function (error) {
-            $scope.messages = error.message;
-        };
-
         var LoadBookData = function () {
-            BookService.GetBooks().then(onGetBookSuccess, onGetBookError);
+            BookService.GetBooks().then(onGetBookSuccess);
         };
 
         $scope.GetBookDetails = function (id) {
@@ -26,33 +22,12 @@
         };
 
         $scope.$on('$viewContentLoaded', function () {
+           
+        });
+
+        $scope.$on('$routeChangeSuccess', function () {
             LoadBookData();
         });
+
     }]);
-
-    var BookDetailController = BooksApp.controller('BookDetailController', [
-        '$scope', 'BookService', 'ReviewService',
-
-         function ($scope, BookService, ReviewService) {
-
-             $scope.Book = BookService.BookDetailData;
-
-             $scope.WriteReview = function () {
-                 ReviewService.SaveReview($scope.comment, $scope.Book.id).then(function (response) {
-                     $scope.Book.reviews.push({
-                         comment: response.data.comment,
-                         userName: response.data.user.userName
-                     });
-                     $scope.comment = null;
-                 }, function (error) {
-
-                 });
-             };
-
-             $scope.$on('OnBookDetailGet', function (event, data) {
-                 $scope.Book = data;
-             });
-         }
-    ]);
-
 })();

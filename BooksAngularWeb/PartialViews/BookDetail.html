@@ -1,0 +1,92 @@
+﻿<div class="row">
+    <div class="col-md-8">
+        <div class="media">
+            <div class="media-object pull-left">
+                <img ng-src="http://placehold.it/250x250/" alt="Book Image" class="img-responsive img-rounded pull-left" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{Book.title}}</h4>
+                <p class="text-justify">
+                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit,
+                    vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                </p>
+                <div>
+                    <dl class="dl-horizontal pull-left">
+                        <dt>Price  :</dt>
+                        <dd class="text-danger">{{Book.price  | currency}}</dd>
+                        <dt>Year  :</dt>
+                        <dd>{{Book.year }}</dd>
+                        <dt>Author :</dt>
+                        <dd>{{Book.authorName}}</dd>
+                        <dt>Genre : </dt>
+                        <dd>{{Book.genre}}</dd>
+                    </dl>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            Buy
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <ul class="list-inline">
+                    <li>
+                        <img src="http://placehold.it/30x30/" alt="" />
+                    </li>
+                    <li>
+                        <img src="http://placehold.it/30x30/" alt="" />
+                    </li>
+                    <li>
+                        <img src="http://placehold.it/30x30/" alt="" />
+                    </li>
+                    <li>
+                        <img src="http://placehold.it/30x30/" alt="" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 30px">
+    <div class="col-md-8 col-md-push-0">
+        <tabset ng-controller="BookDetailController" ng-show="Book" style="margin: 0px">
+            <tab>
+                <tab-heading>
+                    <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
+                </tab-heading>
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <li class="media" ng-repeat="Review in Book.reviews | limitTo : 4">
+                            <div class="media-body">
+                                <p class="small">&quot;{{Review.comment}}&quot;</p>
+                                <h6 class="text-muted">{{Review.userName}}</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </tab>
+            <tab active="tab.active" disabled="tab.disabled">
+                <tab-heading>
+                    <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
+                </tab-heading>
+                <div class="col-md-12">
+                    <form class="form-horizontal" ng-controller="BookDetailController">
+                        <fieldset>
+                            <div class="form-group">
+                                <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+
+</div>
+
+

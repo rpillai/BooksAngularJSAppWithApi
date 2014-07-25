@@ -38,10 +38,6 @@ footer {
 }
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-.tab-content {
-    margin: 10px;
-}
-
 .tab-content form{
     padding-left:20px;
 }
@@ -52,4 +48,11 @@ footer {
 
 .dl-horizontal dd {
     margin-left: 75px;
+}
+
+.tab-content>div>div:first-child {
+    border-bottom: rgb(221,221,221) solid thin;
+    border-left: rgb(221,221,221) solid thin;
+    border-right: rgb(221,221,221) solid thin;
+    padding-top: 15px;
 }

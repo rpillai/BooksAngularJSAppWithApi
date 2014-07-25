@@ -5,7 +5,9 @@
         '$http','$rootScope',
         function ($http,$rootScope) {
 
-            var BookDetailData;
+            var BookDetailData, baseUrl;
+
+            baseUrl = 'http://localhost:57212/api/books/';
 
             var _getBooks = function () {
                 return $http({
@@ -23,25 +25,23 @@
                     'method': 'GET',
                     'url': 'http://localhost:57212/api/Books/' + id
                 }).then(function (response) {
+
                     BookDetailData = response.data;
-
                     $rootScope.$broadcast('OnBookDetailGet', BookDetailData);
-
                     return response;
                 }, function (error) {
                     return error;
                 });
-
             };
 
-            var _writeReview = function (comment) {
+            var _addBook = function(book) {
                 return $http({
+                    'url': baseUrl,
                     'method': 'POST',
-                    'url': 'http://localhost:57212/api/review',
-                    'data': comment
-                }).then(function (response) {
+                    'data': book
+                }).then(function(response) {
                     return response;
-                }, function (error) {
+                }, function(error) {
                     return error;
                 });
             }
@@ -49,8 +49,8 @@
             return {
                 BookDetailData: BookDetailData,
                 GetBooks: _getBooks,
-                GetBookByID: _getBookByID
-                
+                GetBookByID: _getBookByID,
+                AddBook : _addBook
             }
         }
     ]);

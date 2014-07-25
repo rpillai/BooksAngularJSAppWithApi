@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies','ui.bootstrap']);
+var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
 
 BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
@@ -8,24 +8,32 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             controller: 'BookController',
             templateUrl: 'PartialViews/books.html'
         })
+        .when('/Books/:BookId', {
+            controller: 'BookDetailController',
+            templateUrl: 'PartialViews/bookdetail.html'
+        })
+        .when('/BookAdd', {
+            controller: 'BookAddController',
+            templateUrl : 'PartialViews/bookadd.html'
+        })
         .when('/Login', {
             controller: 'LoginController',
             templateUrl: 'PartialViews/Login.html'
         })
         .when('/Register', {
             controller: 'RegisterController',
-            templateUrl : 'PartialViews/Register.html'
+            templateUrl: 'PartialViews/Register.html'
         })
         .when('/Profile', {
             controller: 'ProfileController',
-            templateUrl : 'PartialViews/Profile.html'
+            templateUrl: 'PartialViews/Profile.html'
         })
         .when('/ViewCart', {
             controller: 'CartController',
             templateUrl: 'PartialViews/ViewCart.html'
         })
         .when('/', {
-          templateUrl : 'PartialViews/Home.html'  
+            templateUrl: 'PartialViews/Home.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -43,7 +51,7 @@ BooksApp.run(['CartService', function (cartService) {
 }]);
 
 BooksApp.config([
-    '$httpProvider', function($httpProvider) {
+    '$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('httpInterceptorService');
     }
 ]);
