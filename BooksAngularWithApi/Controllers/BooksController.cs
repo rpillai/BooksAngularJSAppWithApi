@@ -22,6 +22,7 @@ namespace BooksAngularWithApi.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Books
+        [AllowAnonymous]
         public IQueryable<Book> GetBooks()
         {
             return db.Books.Include(b => b.Author).Include(b => b.Reviews);
@@ -34,23 +35,23 @@ namespace BooksAngularWithApi.Controllers
             var book =
                 await
                     db.Books.Include(br => br.Reviews.Select(r => r.User))
-                        .Include(ba => ba.Author)
-                        .Select(b1 => new BookReviewModel
-                        {
-                            Id = b1.Id,
-                            AuthorName = b1.Author.Name,
-                            Reviews = b1.Reviews.Select(r => new ReviewUserModel
+                            .Include(ba => ba.Author)
+                            .Select(b1 => new BookReviewModel
                             {
-                                Comment = r.Comment,
-                                UserName = r.User.UserName
-                            }),
-                            Price = b1.Price,
-                            Genre = b1.Genre,
-                            Title = b1.Title,
-                            Year = b1.Year
-                        })
-                        .Where(b => b.Id == id)
-                        .FirstOrDefaultAsync();
+                                Id = b1.Id,
+                                AuthorName = b1.Author.Name,
+                                Reviews = b1.Reviews.Select(r => new ReviewUserModel
+                                {
+                                    Comment = r.Comment,
+                                    UserName = r.User.UserName
+                                }),
+                                Price = b1.Price,
+                                Genre = b1.Genre,
+                                Title = b1.Title,
+                                Year = b1.Year
+                            })
+                            .Where(b => b.Id == id)
+                            .FirstOrDefaultAsync();
 
 
             if (book == null)

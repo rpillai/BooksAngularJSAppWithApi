@@ -11,8 +11,6 @@ var AccountService = BooksApp.factory('AccountService', ['$http', 'CookieService
             token: ""
         };
 
-        var _cartItems = [];
-
         var _register = function (email, password) {
             return $http(
                 {
@@ -94,8 +92,7 @@ var AccountService = BooksApp.factory('AccountService', ['$http', 'CookieService
             Login: _login,
             Logout: _logOut,
             FillAuthData: fillAuthData,
-            AuthData: _authData,
-            CartItems: _cartItems
+            AuthData: _authData
         }
 
     }

@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label class="control-label">Author</label>
                 <select class="form-control" ng-model="Book.AuthorId">
-                    <option ng-repeat="Author in Authors" value="{{Author.id}}">{{Author.name}}</option>
+                    <option ng-repeat="Author in Authors | orderBy:name" value="{{Author.id}}">{{Author.name}}</option>
                 </select>
             </div>
             <div class="form-group">

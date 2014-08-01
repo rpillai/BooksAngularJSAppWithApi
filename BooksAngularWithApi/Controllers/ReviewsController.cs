@@ -119,8 +119,6 @@ namespace BooksAngularWithApi.Controllers
         {
             var reviews = await db.Reviews.Include(r => r.BookId).Include(r => r.UserID).AnyAsync(x => x.BookId == Convert.ToInt32(bookID));
 
-            
-
             return Ok(reviews);
         }
 

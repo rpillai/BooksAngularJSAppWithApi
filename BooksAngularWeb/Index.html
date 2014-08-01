@@ -23,10 +23,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/Home" class="hidden-xs hidden-sm">Home</a></li>
+                    <li><a href="#/Home" class="hidden-sm hidden-xs">Home</a></li>
                     <li><a href="#/Books">Books</a></li>
                     <li><a href="#/Authors">Authors</a></li>
                 </ul>
+                
                 <form class="navbar-form navbar-right" role="login" ng-controller="LoginController" ng-hide="AuthData.isAuth">
                     <div class="form-group">
                         <input type="text" class="form-control input-sm" placeholder="Email" ng-model="login.email" required>
@@ -38,7 +39,6 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right" ng-controller="IndexController" ng-show="AuthData.isAuth">
                     <li> <p class="navbar-text"><a ng-href="#/Profile" class="navbar-link">{{AuthData.userName}}</a></p></li>
-                    <!--<li class="nav nav-divider"></li>-->
                     <li><a ng-href="" ng-click="Logout()">Logout</a></li>
                 </ul>
                 <div class="nav navbar-nav navbar-right">
@@ -46,7 +46,7 @@
                         <p class="navbar-text"><a ng-href="#/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span>  Items <span class="badge">{{count}}</span></a></p>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
     </div>
     <div class="container body-content" style="margin-top: 30px" ng-view>
@@ -57,14 +57,17 @@
             <span class="glyphicon glyphicon-copyright-mark"></span> 2014 Books Application
         </footer>
     </div>
+    
+    
     <script type="text/javascript" src="Scripts/lib/angular/angular.js"></script>
     <script type="text/javascript" src="Scripts/lib/angular/angular-cookies.js"></script>
     <script type="text/javascript" src="Scripts/lib/angular/angular-route.js"></script>
     <script type="text/javascript" src="Scripts/lib/angular/angular-animate.js"></script>
+    <script type="text/javascript" src="Scripts/lib/angular/angular-sanitize.js"></script>
     <script type="text/javascript" src="Scripts/lib/angular-ui/ui-bootstrap.js"></script>
-    <script type="text/javascript" src="Scripts/lib/angular-ui/ui-bootstrap-tpls.min.js"></script>
-    <!--<script type="text/javascript" src="Scripts/lib/jquery/jquery-1.10.2.js"></script>-->
-    <!--<script type="text/javascript" src="Scripts/lib/bootstrap/bootstrap.js"></script>-->
+    <script type="text/javascript" src="Scripts/lib/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="Scripts/lib/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="Scripts/lib/bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="Scripts/lib/modernizr/modernizr-2.6.2.js"></script>
     <script type="text/javascript" src="Scripts/lib/respond/respond.js"></script>
 
@@ -76,17 +79,23 @@
     <script type="text/javascript" src="Scripts/app/services/reviewService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/cartService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/bookService.js"></script>
-    <script type="text/javascript" src="Scripts/app/services/CookieService.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/cookieService.js"></script>
     <script type="text/javascript" src="Scripts/app/services/authorService.js"></script>
+    <script type="text/javascript" src="Scripts/app/services/orderService.js"></script>
+
 
     <!-- controllers -->
     <script type="text/javascript" src="Scripts/app/controller/loginController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/registerController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/indexController.js"></script>
+
     <script type="text/javascript" src="Scripts/app/controller/profileController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/bookDetailController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/BookAddController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/booksController.js"></script>
-    <script type="text/javascript" src="Scripts/app/controller/CartController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/cartController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/checkOutController.js"></script>
+    <script type="text/javascript" src="Scripts/app/controller/loginModalController.js"></script>
+    
 </body>
 </html>

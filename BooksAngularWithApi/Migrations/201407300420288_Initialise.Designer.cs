@@ -13,7 +13,7 @@ namespace BooksAngularWithApi.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201407210716065_Initialise"; }
+            get { return "201407300420288_Initialise"; }
         }
         
         string IMigrationMetadata.Source

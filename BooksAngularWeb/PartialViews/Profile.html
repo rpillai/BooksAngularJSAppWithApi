@@ -4,7 +4,7 @@
             <tab-heading>
                 Change Password
             </tab-heading>
-            <div class="col-md-12 center-block" >
+            <div class="col-md-12 center-block">
                 <div class="col-md-8">
                     <form class="form-horizontal" novalidate>
                         <fieldset>
@@ -35,21 +35,83 @@
                     </form>
                 </div>
                 <!--<div class="col-md-4">
-                    <div>
-                        <p>List of Errors</p>
-                        <ul class="list-group list-unstyled list-group-item-danger">
-                            <li class="list-group-item-danger">Error1</li>
-                            <li>Error1</li>
-                            <li>Error1</li>
-                        </ul>
-                    </div>
-                </div>-->
+                        <div>
+                            <p>List of Errors</p>
+                            <ul class="list-group list-unstyled list-group-item-danger">
+                                <li class="list-group-item-danger">Error1</li>
+                                <li>Error1</li>
+                                <li>Error1</li>
+                            </ul>
+                        </div>
+                    </div>-->
             </div>
         </tab>
         <tab>
             <tab-heading>
                 Update Profile
             </tab-heading>
+            <div></div>
+        </tab>
+        <tab>
+            <tab-heading>
+                My Orders
+            </tab-heading>
+            <div class="col-md-12">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-4"><h5 class="list-group-item-heading">Order No</h5></div>
+                            <div class="col-md-4 col-xs-4"><h5 class="list-group-item-heading">Order Date</h5></div>
+                            <div class="col-md-4 col-xs-4"><h5 class="list-group-item-heading">Amount</h5></div>
+                        </div>
+                    </div>
+                    <div class="list-group-item list-group-item-text" ng-repeat="Order in Orders">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-4">
+                                <a ng-href="" class="btn-link" ng-click="GetOrderDetails(Order.id)" class="text-center">{{Order.id}}</a>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                {{Order.orderDate | date : "dd-MM-yyyy"}}
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                {{Order.orderAmount | currency}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tab>
     </tabset>
+</div>
+<div class="modal" ng-controller="ProfileController">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table-responsive table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="OrderDetail in OrderDetails">
+                            <td>{{OrderDetail.title}}</td>
+                            <td>{{OrderDetail.unitPrice | currency}}</td>
+                            <td>{{OrderDetail.qty}}</td>
+                            <td>{{OrderDetail.lineTotal | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">Close</button>
+            </div>
+        </div>
+    </script>
 </div>

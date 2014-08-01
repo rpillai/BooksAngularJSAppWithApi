@@ -28,7 +28,7 @@
                         </button>
                     </div>
                 </div>
-                
+
             </div>
             <div class="row">
                 <ul class="list-inline">
@@ -49,44 +49,42 @@
         </div>
     </div>
 </div>
-<div class="row" style="margin-top: 30px">
-    <div class="col-md-8 col-md-push-0">
-        <tabset ng-controller="BookDetailController" ng-show="Book" style="margin: 0px">
-            <tab>
-                <tab-heading>
-                    <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
-                </tab-heading>
-                <div class="col-md-12">
-                    <ul class="media-list">
-                        <li class="media" ng-repeat="Review in Book.reviews | limitTo : 4">
-                            <div class="media-body">
-                                <p class="small">&quot;{{Review.comment}}&quot;</p>
-                                <h6 class="text-muted">{{Review.userName}}</h6>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </tab>
-            <tab active="tab.active" disabled="tab.disabled">
-                <tab-heading>
-                    <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
-                </tab-heading>
-                <div class="col-md-12">
-                    <form class="form-horizontal" ng-controller="BookDetailController">
-                        <fieldset>
-                            <div class="form-group">
-                                <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </tab>
-        </tabset>
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-8 col-md-push-0">
+            <tabset ng-controller="BookDetailController" ng-show="Book" style="margin: 0px">
+                <tab>
+                    <tab-heading>
+                        <h6 class="small"><i class="glyphicon glyphicon-align-left"></i> Reviews</h6>
+                    </tab-heading>
+                    <div class="col-md-12">
+                        <ul class="media-list">
+                            <li class="media" ng-repeat="Review in Book.reviews | limitTo : 4">
+                                <div class="media-body">
+                                    <p class="small">{{Review.comment}}></p>
+                                    <h6 class="text-muted">{{Review.userName}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </tab>
+                <tab active="tab.active" disabled="tab.disabled">
+                    <tab-heading>
+                        <h6 class="small"><i class="glyphicon glyphicon-edit"></i> Write Review</h6>
+                    </tab-heading>
+                    <div class="col-md-12">
+                        <form class="form-horizontal" ng-controller="BookDetailController">
+                            <fieldset>
+                                <div class="form-group">
+                                    <textarea name="txtcomment" rows="5" required autofocus ng-model="comment" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary pull-left" ng-click="WriteReview()">Save</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+
     </div>
-
-</div>
-
-

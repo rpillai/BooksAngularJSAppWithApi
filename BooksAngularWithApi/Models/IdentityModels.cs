@@ -46,5 +46,9 @@ namespace BooksAngularWithApi.Models
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<BooksAngularWithApi.Models.OrderDetail> OrderDetails { get; set; }
+
+        public System.Data.Entity.DbSet<BooksAngularWithApi.Models.Order> Orders { get; set; }
     }
 }

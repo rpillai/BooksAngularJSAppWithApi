@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
+var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'ngSanitize']);
 
 BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
@@ -31,8 +31,10 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
         .when('/ViewCart', {
             controller: 'CartController',
             templateUrl: 'PartialViews/ViewCart.html'
-        })
-        .when('/', {
+        }).when('/CheckOut', {
+            controller: 'CheckOutController',
+            templateUrl : 'PartialViews/Checkout.html'
+        }).when('/', {
             templateUrl: 'PartialViews/Home.html'
         })
         .otherwise({

@@ -1,0 +1,42 @@
+﻿    <div class="row center-block" ng-controller="CheckOutController">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-lg-offset-1 col-xs-offset-1">
+                        <form class="form-horizontal" name="shippingForm" novalidate ng-submit="shippingForm.$dirty && shippingForm.$valid && SubmitOrder(shipping)">
+                            <fieldset>
+                                <legend>Shipping Address</legend>
+
+                                <div class="form-group">
+                                    <label class="control-label">Address1</label>
+                                    <input type="text" value="" class="form-control" ng-model="shipping.Address1" required autofocus placeholder="Address1" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Address2</label>
+                                    <input type="text" value="" class="form-control" ng-model="shipping.Address2" required autofocus placeholder="Address2" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">PostCode</label>
+                                    <input type="text" value="" class="form-control" ng-model="shipping.PostCode" required autofocus placeholder="PostCode" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Suburb</label>
+                                    <input type="text" value="" class="form-control" ng-model="shipping.Suburb" required autofocus placeholder="Suburb" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">State</label>
+                                    <input type="text" value="" class="form-control" ng-model="shipping.State" required autofocus placeholder="State" />
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Order</button>
+                                </div>
+                                <div class="form-control-feedback">
+                                    <p ng-show="{{message}}" class="text-danger">{{message}}</p>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

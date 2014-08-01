@@ -1,48 +1,45 @@
-﻿<div class="row">
-    <a ng-href="#/BookAdd/">Add Book</a>
-    <div ng-controller="BookController" ng-repeat="Book in Books" class="animated lightSpeedIn" ng-init="Index = $index">
-        <div class=" col-lg-4 col-xs-4 col-sm-4 col-md-4" style="padding-bottom:15px;padding-left: 0px;padding-right:0px;margin-bottom: 15px">
-            <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 0px" >
-                <a href="" ng-click="GetBookDetails(Book.id)" class="pull-left">
-                    <img src="http://placehold.it/120x120/" alt="{{Book.Title}}" class="img-responsive img-rounded media-object" />
-                </a>
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-8">
-                <!--<div class="media-body">-->
-                <div class="row">
-                    <div class="col-md-11 col-sm-11" style="overflow: hidden;max-height: 50px">
-                        <div class="media-heading">
-                            <a ng-href="#/Books/{{Book.id}}" ng-click="GetBookDetails(Book.id)">
-                                <small><strong class="text-primary" style="overflow: hidden">{{Book.title}}</strong></small>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="media-body">
-                        <div class="col-md-6 col-sm-6">
-                            <p class="text-danger small">
-                                {{Book.price | currency}}
-                            </p>
-                        </div>
-                        <div class="col-md-3 col-sm-3">
-                            <button class="btn btn-primary btn-xs" ng-click="AddToCart(Book)">
-                                <span class="glyphicon glyphicon-shopping-cart glyphicon-resize-small"></span>
-                                Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6  col-sm-6">
-                        <p class="text-muted small"> {{Book.author.name}}</p>
-                    </div>
-                </div>
+﻿<a ng-href="#/BookAdd/">Add Book</a>
+<div class="row" style="border:1px solid;margin-top: 5px;border-radius: 5px">
+    <div>
+        <ul class="pager" style="padding-left: 15px; padding-right: 15px;text-align: center">
+            <li class="previous" ng-disabled="{{currentIndex === 0}}">
                 
-
-                <!--</div>-->
+                    <a ng-href="" href="" ng-click="GetNextBooks('P')"><span class="glyphicon glyphicon-backward"></span> Prev</a>
+            </li>
+            <li class="next">
+                <a ng-href="" href="" ng-click="GetNextBooks('N')">Next <span class="glyphicon glyphicon-forward"></span></a>
+            </li>
+            <li>
+                <h4 class="caption"> Popular Books</h4>    
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="BookController" ng-repeat="Book in localBooks | limitTo : 4" class="animated lightSpeedIn" ng-init="Index = $index">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail" style="margin-top: 10px">
+                <a href="" ng-click="GetBookDetails(Book.id)">
+                    <img src="http://placehold.it/200x200/" alt="{{Book.Title}}" class="img-rounded img-responsive" />
+                </a>
+                <div class="caption">
+                    <div style="overflow: hidden">
+                        <a ng-href="#/Books/{{Book.id}}" ng-click="GetBookDetails(Book.id)">
+                            <h5>{{Book.title}}</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="text small"> {{Book.author.name}}</span> <span class="text-danger small">{{Book.price | currency}}</span>
+                        <button class="btn btn-primary btn-xs pull-right" ng-click="AddToCart(Book)">
+                            <span class="glyphicon glyphicon-shopping-cart glyphicon-resize-small"></span>
+                            Buy
+                        </button>
+                    </div>
+                    <p>
+                        <rating class="pull-left" ng-model="rate" max="max" readonly="true"></rating>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 

@@ -7,6 +7,14 @@
 
         var _cartItems = [];
 
+        var _cartItem = {
+            BookId: 0,
+            Title: "",
+            Qty: 0,
+            UnitPrice: 0
+        };
+
+        
         var _addItemToCart = function (bookId, title, qty, price) {
 
             if (_cartItems === undefined) {
@@ -20,10 +28,10 @@
                 item.Qty = item.Qty + qty;
             } else {
                 _cartItems.push({
-                    Id: bookId,
+                    BookId: bookId,
                     Title: title,
                     Qty: qty,
-                    Price: price
+                    UnitPrice: price
                 });
             }
 
@@ -42,8 +50,7 @@
         }
 
         var _clearCart = function () {
-            _cartItems = [];
-
+            _cartItems.length = 0;
             broadCastChanges(_cartItems);
         }
 
@@ -57,6 +64,7 @@
             var items = CookieService.GetCookie(CARTKEY);
 
             if (items) {
+                //_cartItems = items.slice(0);
                 angular.forEach(items, function (value, index) {
                     _cartItems.push(value);
                 });
@@ -67,7 +75,7 @@
             var itemIndex = -1;
 
             angular.forEach(_cartItems, function (value, index) {
-                if (value.Id === id) {
+                if (value.BookId === id) {
                     itemIndex = index;
                 }
             });

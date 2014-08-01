@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-sm-push-4 col-md-push-4">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary">Check Out</button>
+                            <button type="button" class="btn btn-primary" ng-click="GoCheckOut()">Check Out</button>
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,11 @@
                 <tbody>
                     <tr ng-repeat="Item in CartItems">
                         <td style="width: 70%">{{Item.Title}}</td>
-                        <td style="width: 10%">{{Item.Price | currency}}</td>
-                        <td style="width: 10%"> <input class="form-control input-sm" style="horiz-align: right" type="text" ng-model="Item.Qty" ng-change="CalculateGrandTotal()" /></td>
-                        <td style="text-align: right;width: 10%">{{(Item.Price * Item.Qty) | currency}}</td>
+                        <td style="width: 10%">{{Item.UnitPrice | currency}}</td>
+                        <td style="width: 10%"> <input class="form-control input-sm" type="text" ng-model="Item.Qty" ng-change="CalculateGrandTotal()" /></td>
+                        <td style="text-align: right;width: 10%">{{(Item.UnitPrice * Item.Qty) | currency}}</td>
                         <td style="text-align: right;width: 5%">
-                            <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItem(Item.Id)">
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItem(Item.BookId)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>
@@ -98,10 +98,9 @@
                 </div>-->
         </div>
         <!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            Another side content
-        </div>-->
+                Another side content
+            </div>-->
     </div>
-
     <div class="row" ng-controller="CartController" ng-show="CartItems.length === 0">
         <div style="bottom: 75%;right: 50%;position:absolute;">
             <div class="well-lg">
@@ -111,6 +110,7 @@
             </div>
 
         </div>
-
     </div>
+
 </div>
+

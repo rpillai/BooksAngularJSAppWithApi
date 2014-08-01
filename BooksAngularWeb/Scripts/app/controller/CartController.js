@@ -2,41 +2,64 @@
     'use strict';
 
     var CartController = BooksApp.controller(
-          'CartController', ['$scope', 'AccountService','CartService', function ($scope, AccountService, CartService) {
+        'CartController', [
+            '$scope', '$location', '$modal', 'AccountService', 'CartService', function ($scope, $location, $modal, AccountService, CartService) {
 
-              $scope.CartItems = CartService.CartItems;
-              $scope.count = $scope.CartItems.length;
-             
-              $scope.CalculateGrandTotal = function () {
-                  calculateTotal();
-              };
+                $scope.CartItems = CartService.CartItems;
+                $scope.count = $scope.CartItems.length;
 
-              var calculateTotal = function () {
-                  $scope.GrandTotal = 0;
-                  angular.forEach($scope.CartItems, function (value, index) {
-                      $scope.GrandTotal += (value.Qty * value.Price);
-                  });
-              }
+                $scope.CalculateGrandTotal = function () {
+                    calculateTotal();
+                };
 
-              $scope.RemoveItem = function (id) {
-                  CartService.RemoveItem(id);
-                  calculateTotal();
-              }
+                var calculateTotal = function () {
+                    $scope.GrandTotal = 0;
+                    angular.forEach($scope.CartItems, function (value, index) {
+                        $scope.GrandTotal += (value.Qty * value.UnitPrice);
+                    });
+                }
 
-              $scope.ClearCart = function () {
-                  CartService.ClearCart();
-              }
+                $scope.RemoveItem = function (id) {
+                    CartService.RemoveItem(id);
+                    calculateTotal();
+                }
 
-              $scope.$on('CartChanged', function(event, data) {
-                  $scope.CartItems = data;
-                  $scope.count = data.length;
-              });
+                $scope.ClearCart = function () {
+                    CartService.ClearCart();
+                }
 
-              $scope.$on('$viewContentLoaded', function () {
-                  calculateTotal();
-              });
+                $scope.GoCheckOut = function () {
+                    if (AccountService.AuthData.isAuth)
+                        $location.path('/CheckOut');
+                    else {
+                        var modalInstance = $modal.open({
+                            templateUrl: 'PartialViews/LoginModal.html',
+                            controller: 'ModalInstanceCtrl',
+                            size: 'sm',
+                            resolve: {
+                                items: function () {
+                                    return $scope.items;
+                                }
+                            }
+                        });
+                        //$location.path('/Login');
+                    }
+                }
 
+                $scope.$on('CartChanged', function (event, data) {
+                    $scope.CartItems = data;
+                    $scope.count = data.length;
+                });
 
-          }
-          ]);
+                $scope.$on('$viewContentLoaded', function () {
+                    calculateTotal();
+                });
+
+                $scope.items = ['item1', 'item2', 'item3'];
+
+                var showModalForm = function () {
+                   
+                }
+
+            }]);
 })();

@@ -1,13 +1,14 @@
 ﻿(function () {
     var BookAddController = BooksApp.controller('BookAddController', [
-           '$scope', 'BookService', 'AuthorService',
+           '$scope','$filter', 'BookService', 'AuthorService',
 
-            function ($scope, BookService, AuthorService) {
+            function ($scope,$filter, BookService, AuthorService) {
+                var orderBy = $filter('orderBy');
 
                 AuthorService.GetAuthors().then(function (response) {
                     if (response)
                         if (response.status === 200) {
-                            $scope.Authors = response.data;
+                            $scope.Authors = orderBy(response.data, 'name', false);
                         }
                         
                 });

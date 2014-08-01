@@ -20,7 +20,8 @@ namespace BooksAngularWithApi.Models
         public int AuthorId { get; set; }
         public Author Author { get; set; }
 
-        public ICollection<Review> Reviews { get; set; } 
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 
     public class BookReviewModel

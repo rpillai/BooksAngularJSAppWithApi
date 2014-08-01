@@ -32,6 +32,23 @@ namespace BooksAngularWithApi.Migrations
                 .Index(t => t.AuthorId);
             
             CreateTable(
+                "dbo.OrderDetail",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UnitPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Qty = c.Int(nullable: false),
+                        lineTotal = c.Decimal(precision: 18, scale: 2),
+                        OrderId = c.Int(nullable: false),
+                        BookId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
+                .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.BookId);
+            
+            CreateTable(
                 "dbo.Review",
                 c => new
                     {
@@ -105,6 +122,25 @@ namespace BooksAngularWithApi.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Order",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrderDate = c.DateTime(nullable: false),
+                        OrderAmount = c.Decimal(precision: 18, scale: 2),
+                        Address1 = c.String(),
+                        Address2 = c.String(),
+                        Suburb = c.String(),
+                        PostCode = c.Int(nullable: false),
+                        State = c.String(),
+                        Comment = c.String(),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -119,13 +155,17 @@ namespace BooksAngularWithApi.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Order", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.OrderDetail", "OrderId", "dbo.Order");
             DropForeignKey("dbo.Review", "BookId", "dbo.Book");
             DropForeignKey("dbo.Review", "UserID", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.OrderDetail", "BookId", "dbo.Book");
             DropForeignKey("dbo.Book", "AuthorId", "dbo.Author");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Order", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -133,13 +173,17 @@ namespace BooksAngularWithApi.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Review", new[] { "UserID" });
             DropIndex("dbo.Review", new[] { "BookId" });
+            DropIndex("dbo.OrderDetail", new[] { "BookId" });
+            DropIndex("dbo.OrderDetail", new[] { "OrderId" });
             DropIndex("dbo.Book", new[] { "AuthorId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Order");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Review");
+            DropTable("dbo.OrderDetail");
             DropTable("dbo.Book");
             DropTable("dbo.Author");
         }
