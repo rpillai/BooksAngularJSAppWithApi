@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    //'use strict';
 
     var CartController = BooksApp.controller(
         'CartController', [
@@ -35,16 +35,20 @@
                         var modalInstance = $modal.open({
                             templateUrl: 'PartialViews/LoginModal.html',
                             controller: 'ModalInstanceCtrl',
-                            size: 'sm',
-                            resolve: {
-                                items: function () {
-                                    return $scope.items;
-                                }
-                            }
+                            size: 'sm'
                         });
-                        //$location.path('/Login');
                     }
+
+                    modalInstance.result.then(function (reason) {
+                        if (reason === 'Guest') {
+                            $location.path('/CheckOut');
+                        }
+                        else if (reason === 'Login') {
+                            $location.path('/Login');
+                        }
+                    });
                 }
+                
 
                 $scope.$on('CartChanged', function (event, data) {
                     $scope.CartItems = data;
@@ -57,9 +61,6 @@
 
                 $scope.items = ['item1', 'item2', 'item3'];
 
-                var showModalForm = function () {
-                   
-                }
-
             }]);
+
 })();

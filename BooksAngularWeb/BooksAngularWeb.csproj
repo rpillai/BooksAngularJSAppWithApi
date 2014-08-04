@@ -78,19 +78,23 @@
   <ItemGroup>
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="favicon.ico" />
     <Content Include="PartialViews\Author.html" />
     <Content Include="PartialViews\BookAdd.html" />
     <Content Include="PartialViews\BookDetail.html" />
     <Content Include="PartialViews\CheckOut.html" />
     <Content Include="PartialViews\Home.html" />
     <Content Include="PartialViews\LoginModal.html" />
+    <Content Include="PartialViews\OrderDetailModal.html" />
     <Content Include="PartialViews\Profile.html" />
     <Content Include="PartialViews\Register.html" />
+    <Content Include="Scripts\app\controller\AuthorController.js" />
     <Content Include="Scripts\app\controller\bookAddController.js" />
     <Content Include="Scripts\app\controller\checkOutController.js" />
     <Content Include="Scripts\app\controller\indexController.js" />
     <Content Include="Scripts\app\controller\loginController.js" />
     <Content Include="Scripts\app\controller\loginModalController.js" />
+    <Content Include="Scripts\app\controller\ModalOrderDetailCtrl.js" />
     <Content Include="Scripts\app\controller\profileController.js" />
     <Content Include="Scripts\app\controller\registerController.js" />
     <Content Include="Scripts\app\directives\simpledirective.js" />

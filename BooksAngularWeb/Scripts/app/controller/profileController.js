@@ -7,19 +7,20 @@
             $scope.Orders = response.data;
         });
 
-        $scope.GetOrderDetails = function(id) {
+        $scope.GetOrderDetails = function (id) {
+
             OrderService.GetOrderDetailsByOrder(id).then(function(response) {
+
                 $scope.OrderDetails = response.data;
 
                 var modalInstance = $modal.open({
-                    templateUrl: 'myModalContent.html',
-                    controller: ModalInstanceCtrl,
+                    templateUrl: 'PartialViews/OrderDetailModal.html',
+                    controller: 'ModalOrderDetailCtrl',
                     size: 'sm',
-                    windowClass: 'position:relative;',
                     resolve : {
                         OrderDetails: function() {
                             return $scope.OrderDetails;
-                        }   
+                        }  
                     }
                 });
 
@@ -28,18 +29,5 @@
                 });
             });
         }
-
-
-
     }]);
-
-    var ModalInstanceCtrl = function($scope, $modalInstance, OrderDetails) {
-        $scope.OrderDetails = OrderDetails;
-
-        $scope.ok = function() {
-            $modalInstance.close();
-        }
-    };
-
-   
 })();

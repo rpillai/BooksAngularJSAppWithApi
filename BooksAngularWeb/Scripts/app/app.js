@@ -8,6 +8,10 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             controller: 'BookController',
             templateUrl: 'PartialViews/books.html'
         })
+        .when('/Authors', {
+            controller: 'AuthorController',
+            templateUrl : 'PartialViews/Author.html'
+        })
         .when('/Books/:BookId', {
             controller: 'BookDetailController',
             templateUrl: 'PartialViews/bookdetail.html'

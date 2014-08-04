@@ -83,35 +83,3 @@
         </tab>
     </tabset>
 </div>
-<div class="modal" ng-controller="ProfileController">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Order Details</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table-responsive table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Qty</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="OrderDetail in OrderDetails">
-                            <td>{{OrderDetail.title}}</td>
-                            <td>{{OrderDetail.unitPrice | currency}}</td>
-                            <td>{{OrderDetail.qty}}</td>
-                            <td>{{OrderDetail.lineTotal | currency}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">Close</button>
-            </div>
-        </div>
-    </script>
-</div>

@@ -17,7 +17,11 @@
 
                 if (response.status == 200) {
                     $scope.successmessage = "Registered Successfully";
-                    $location.path('#/Login');
+
+                    AccountService.Login($scope.register.email, $scope.register.password).
+                        then(function (loginStatus) {
+                        console.log(loginStatus);
+                    });
                 }
             }
 

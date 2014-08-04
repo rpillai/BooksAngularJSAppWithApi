@@ -102,6 +102,18 @@ namespace BooksAngularWithApi.Controllers
             return Ok(author);
         }
 
+        [ResponseType(typeof(List<Author>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> SearchAuthors(string searchString)
+        {
+            var authors = await db.Authors.Where(a => a.Name.ToLower().Contains(searchString.ToLower())).ToListAsync();
+
+            if (authors != null)
+                return Ok(authors);
+            
+            return NotFound();
+        }
+
 
         protected override void Dispose(bool disposing)
         {
