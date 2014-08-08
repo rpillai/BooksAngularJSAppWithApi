@@ -4,7 +4,7 @@
    var ReviewService =  BooksApp.factory('ReviewService', [
             '$http', function ($http) {
 
-                var baseUrl = 'http://localhost:57212/api/reviews';
+                var baseUrl = 'http://api.angularbookapp.com.au:57212/api/reviews';
 
                 var _saveReview = function (comment, bookid) {
 

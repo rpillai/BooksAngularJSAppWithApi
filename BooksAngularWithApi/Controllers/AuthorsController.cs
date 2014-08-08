@@ -13,6 +13,7 @@ using BooksAngularWithApi.Models;
 
 namespace BooksAngularWithApi.Controllers
 {
+    [RoutePrefix("api/Authors")]
     public class AuthorsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -103,14 +104,26 @@ namespace BooksAngularWithApi.Controllers
         }
 
         [ResponseType(typeof(List<Author>))]
-        [HttpGet]
-        public async Task<IHttpActionResult> SearchAuthors(string searchString)
+        [Route("SearchByName")]
+        public async Task<IHttpActionResult> GetSearchByName(string searchString)
         {
             var authors = await db.Authors.Where(a => a.Name.ToLower().Contains(searchString.ToLower())).ToListAsync();
 
             if (authors != null)
                 return Ok(authors);
             
+            return NotFound();
+        }
+
+        [ResponseType(typeof(Author))]
+        [Route("SearchByID")]
+        public async Task<IHttpActionResult> GetSearchByID(int id)
+        {
+            var authors = await db.Authors.Where(a => a.Id == id).FirstOrDefaultAsync();
+
+            if (authors != null)
+                return Ok(authors);
+
             return NotFound();
         }
 

@@ -83,6 +83,8 @@
     <Content Include="PartialViews\BookAdd.html" />
     <Content Include="PartialViews\BookDetail.html" />
     <Content Include="PartialViews\CheckOut.html" />
+    <Content Include="PartialViews\ForgotPassword.html" />
+    <Content Include="PartialViews\GetToken.html" />
     <Content Include="PartialViews\Home.html" />
     <Content Include="PartialViews\LoginModal.html" />
     <Content Include="PartialViews\OrderDetailModal.html" />
@@ -91,6 +93,9 @@
     <Content Include="Scripts\app\controller\AuthorController.js" />
     <Content Include="Scripts\app\controller\bookAddController.js" />
     <Content Include="Scripts\app\controller\checkOutController.js" />
+    <Content Include="Scripts\app\controller\ForgotPasswordController.js" />
+    <Content Include="Scripts\app\controller\getTokenController.js" />
+    <Content Include="Scripts\app\controller\homeController.js" />
     <Content Include="Scripts\app\controller\indexController.js" />
     <Content Include="Scripts\app\controller\loginController.js" />
     <Content Include="Scripts\app\controller\loginModalController.js" />
@@ -472,16 +477,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55387</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55387/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

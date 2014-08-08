@@ -52,23 +52,25 @@ namespace BooksAngularWithApi
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "0000000048125371",
+                clientSecret: "8xLdHUnociFyZZmDS6eI1EqZmc39mn5r");
 
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
+            app.UseTwitterAuthentication(
+                consumerKey: "I18QDmLt0HFwnNZKnoIkZHCQb",
+                consumerSecret: "vO6U0IsDbVjzR3I6lpKY6htfUR8n9ccMpTuQjsxg50IrU2n5YM");
 
             //app.UseFacebookAuthentication(
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseGoogleAuthentication();
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "797691327397-ach2s67j1rpeo0i5sajbb5cll8ps9e1r.apps.googleusercontent.com",
+                ClientSecret = "_MLT5rS2Es611YPCev5RRUw7"
+            });
         }
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -307,7 +309,8 @@ namespace BooksAngularWithApi.Controllers
                         provider = description.AuthenticationType,
                         response_type = "token",
                         client_id = Startup.PublicClientId,
-                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                        //redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                        redirect_uri = HttpUtility.UrlPathEncode(returnUrl),
                         state = state
                     }),
                     State = state
@@ -372,6 +375,34 @@ namespace BooksAngularWithApi.Controllers
             }
             return Ok();
         }
+
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        [OverrideAuthentication]
+        [OverrideActionFilters]
+        public async Task<IHttpActionResult> GetResetPassword(string email)
+        {
+            var user = await UserManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+            var callbackUrl = Url.Request.RequestUri.AbsoluteUri + "ConfirmResetPassword?userid=" + user.Id + "&token=" +
+                              code;
+
+            await UserManager.SendEmailAsync(user.Id, "Reset Password Request", callbackUrl);
+
+            return Ok();
+        }
+
+        
+
+
+         
 
         protected override void Dispose(bool disposing)
         {

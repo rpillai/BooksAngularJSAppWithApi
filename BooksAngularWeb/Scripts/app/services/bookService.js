@@ -7,12 +7,12 @@
 
             var BookDetailData, baseUrl;
 
-            baseUrl = 'http://localhost:57212/api/books/';
+            baseUrl = 'http://api.angularbookapp.com.au:57212/api/books/';
 
             var _getBooks = function () {
                 return $http({
                     'method': 'GET',
-                    'url': 'http://localhost:57212/api/books/'
+                    'url': baseUrl
                 }).then(function (response) {
                     return response;
                 }, function (error) {
@@ -23,7 +23,7 @@
             var _getBookByID = function (id) {
                 return $http({
                     'method': 'GET',
-                    'url': 'http://localhost:57212/api/Books/' + id
+                    'url': 'http://api.angularbookapp.com.au:57212/api/Books/' + id
                 }).then(function (response) {
 
                     BookDetailData = response.data;

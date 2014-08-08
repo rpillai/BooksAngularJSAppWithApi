@@ -37,16 +37,18 @@
                             controller: 'ModalInstanceCtrl',
                             size: 'sm'
                         });
+
+                        modalInstance.result.then(function (reason) {
+                            if (reason === 'Guest') {
+                                $location.path('/CheckOut');
+                            }
+                            else if (reason === 'Login') {
+                                $location.path('/Login');
+                            }
+                        });
                     }
 
-                    modalInstance.result.then(function (reason) {
-                        if (reason === 'Guest') {
-                            $location.path('/CheckOut');
-                        }
-                        else if (reason === 'Login') {
-                            $location.path('/Login');
-                        }
-                    });
+                    
                 }
                 
 

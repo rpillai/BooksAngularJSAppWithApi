@@ -80,7 +80,8 @@ namespace BooksAngularWithApi.Providers
             {
                 Uri expectedRootUri = new Uri(context.Request.Uri, "/");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+                if (expectedRootUri.AbsoluteUri == context.RedirectUri
+                    || context.RedirectUri == "http://www.angularbookapp.com.au/")
                 {
                     context.Validated();
                 }

@@ -5,7 +5,7 @@
         '$http', '$rootScope',
         function($http, $rootScope) {
 
-            var baseUrl = 'http://localhost:57212/api/Authors';
+            var baseUrl = 'http://api.angularbookapp.com.au:57212/api/Authors';
 
             var _getAuthors = function() {
                 return $http({

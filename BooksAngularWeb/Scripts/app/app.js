@@ -10,7 +10,7 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
         })
         .when('/Authors', {
             controller: 'AuthorController',
-            templateUrl : 'PartialViews/Author.html'
+            templateUrl: 'PartialViews/Author.html'
         })
         .when('/Books/:BookId', {
             controller: 'BookDetailController',
@@ -18,15 +18,22 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
         })
         .when('/BookAdd', {
             controller: 'BookAddController',
-            templateUrl : 'PartialViews/bookadd.html'
+            templateUrl: 'PartialViews/bookadd.html'
         })
-        .when('/Login', {
+        .when('/GetToken', {
+            controller: 'GetTokenController',
+            templateUrl: 'PartialViews/GetToken.html'
+        }).when('/Login', {
             controller: 'LoginController',
             templateUrl: 'PartialViews/Login.html'
         })
         .when('/Register', {
             controller: 'RegisterController',
             templateUrl: 'PartialViews/Register.html'
+        })
+        .when('/ForgotPassword', {
+            controller: 'ForgotPasswordController',
+            templateUrl: 'PartialViews/ForgotPassword.html'
         })
         .when('/Profile', {
             controller: 'ProfileController',
@@ -37,7 +44,7 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             templateUrl: 'PartialViews/ViewCart.html'
         }).when('/CheckOut', {
             controller: 'CheckOutController',
-            templateUrl : 'PartialViews/Checkout.html'
+            templateUrl: 'PartialViews/Checkout.html'
         }).when('/', {
             templateUrl: 'PartialViews/Home.html'
         })

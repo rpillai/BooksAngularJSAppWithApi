@@ -4,7 +4,7 @@
     var orderService = BooksApp.service('OrderService', [
         '$http','CartService', function($http, CartService) {
 
-            var baseOrderUrl = 'http://localhost:57212/api/orders/';
+            var baseOrderUrl = 'http://api.angularbookapp.com.au:57212/api/orders/';
 
             var _placeOrder = function(shipping) {
                 var order = {};
@@ -41,7 +41,7 @@
             var _getOrderDetailsByOrderId = function(id) {
                 return $http({
                     method: 'GET',
-                    url: 'http://localhost:57212/api/orderdetails/GetOrderDetailsByOrder?id=' + id
+                    url: 'http://api.angularbookapp.com.au:57212/api/orderdetails/GetOrderDetailsByOrder?id=' + id
                 }).then(function (response) {
                     return response;
                 });

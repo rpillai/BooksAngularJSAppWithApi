@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var IndexController = BooksApp.controller('IndexController', ['$scope', 'AccountService', function ($scope, AccountService) {
+    var IndexController = BooksApp.controller('IndexController', ['$scope','$location', 'AccountService', function ($scope,$location, AccountService) {
 
         $scope.AuthData = AccountService.AuthData;
 
@@ -10,6 +10,7 @@
 
         $scope.Logout = function () {
             AccountService.Logout();
+            $location.path('/');
         };
     }]);
 
