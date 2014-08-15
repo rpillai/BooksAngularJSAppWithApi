@@ -20,10 +20,15 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             controller: 'BookAddController',
             templateUrl: 'PartialViews/bookadd.html'
         })
-        .when('/GetToken', {
-            controller: 'GetTokenController',
-            templateUrl: 'PartialViews/GetToken.html'
-        }).when('/Login', {
+        .when('/ConfirmRegister', {
+            controller: 'ConfirmRegisterController',
+            templateUrl: 'PartialViews/ConfirmRegister.html'
+        })
+        .when('/RegisterExternal', {
+            controller: 'RegisterExternalController',
+            templateUrl: 'PartialViews/RegisterExternal.html'
+        })
+        .when('/Login', {
             controller: 'LoginController',
             templateUrl: 'PartialViews/Login.html'
         })
@@ -52,7 +57,7 @@ BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             redirectTo: '/'
         });
 
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 }]);
 
 BooksApp.run(['AccountService', function (accountService) {

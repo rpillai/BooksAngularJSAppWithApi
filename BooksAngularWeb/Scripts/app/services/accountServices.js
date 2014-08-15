@@ -45,12 +45,14 @@ var AccountService = BooksApp.factory('AccountService', [
                 }
                 ).then(function (response) {
 
-                    _authData.isAuth = true;
-                    _authData.token = response.data.access_token;
-                    _authData.userName = response.data.userName;
+                    _setAuthData(response.data.access_token, response.data.userName);
 
-                    CookieService.SetCookie(AUTHKEY, _authData);
-                    $rootScope.$broadcast('OnSuccessLogin', _authData);
+                    //_authData.isAuth = true;
+                    //_authData.token = response.data.access_token;
+                    //_authData.userName = response.data.userName;
+
+                    //CookieService.SetCookie(AUTHKEY, _authData);
+                    //$rootScope.$broadcast('OnSuccessLogin', _authData);
 
                     return response;
 
@@ -80,12 +82,10 @@ var AccountService = BooksApp.factory('AccountService', [
                 var authData = CookieService.GetCookie(AUTHKEY);
 
                 if (authData) {
-                    _authData.isAuth = authData.isAuth,
-                        _authData.userName = authData.userName,
-                        _authData.token = authData.token
-                };
-
-
+                    _authData.isAuth = authData.isAuth;
+                    _authData.userName = authData.userName;
+                    _authData.token = authData.token;
+                }
             }
 
             var _forgotPassword = function (email) {
@@ -102,10 +102,31 @@ var AccountService = BooksApp.factory('AccountService', [
                 var returnUrl = encodeURIComponent('http://www.angularbookapp.com.au/');
                 return $http.get
                 (
-                    baseUrl + '/ExternalLogins?returnUrl=' + returnUrl 
+                    baseUrl + '/ExternalLogins?returnUrl=' + returnUrl + '&generateState=true'
                 ).then(function (response) {
                     return response;
                 });
+            }
+
+            var _setAuthData = function (access_token, userName) {
+                _authData.isAuth = true;
+                _authData.token = access_token;
+                _authData.userName = userName;
+                CookieService.SetCookie(AUTHKEY, _authData);
+                $rootScope.$broadcast('OnSuccessLogin', _authData);
+            }
+
+            var _setAuthUserName = function (userName) {
+                var authData = CookieService.GetCookie(AUTHKEY);
+                _authData.userName = userName;
+                CookieService.SetCookie(AUTHKEY, _authData);
+                $rootScope.$broadcast('OnSuccessLogin', _authData);
+            }
+
+            var _getUserInfo = function() {
+                return $http.get(
+                    baseUrl + 'UserInfo'
+                );
             }
 
             return {
@@ -115,6 +136,9 @@ var AccountService = BooksApp.factory('AccountService', [
                 FillAuthData: fillAuthData,
                 ForgotPassword: _forgotPassword,
                 GetExternalProviders: _getExternalProviders,
+                GetUserInfo: _getUserInfo,
+                SetAuthData : _setAuthData,
+                SetAuthUserName : _setAuthUserName,
                 AuthData: _authData
             }
 

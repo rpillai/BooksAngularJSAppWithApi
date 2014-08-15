@@ -40,17 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Cors">
-      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.0\lib\net45\System.Web.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -60,13 +50,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.Cors">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.0\lib\net45\System.Web.Http.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -83,25 +66,28 @@
     <Content Include="PartialViews\BookAdd.html" />
     <Content Include="PartialViews\BookDetail.html" />
     <Content Include="PartialViews\CheckOut.html" />
+    <Content Include="PartialViews\ConfirmRegister.html" />
     <Content Include="PartialViews\ForgotPassword.html" />
-    <Content Include="PartialViews\GetToken.html" />
+    <Content Include="PartialViews\RegisterExternal.html" />
     <Content Include="PartialViews\Home.html" />
     <Content Include="PartialViews\LoginModal.html" />
     <Content Include="PartialViews\OrderDetailModal.html" />
     <Content Include="PartialViews\Profile.html" />
     <Content Include="PartialViews\Register.html" />
-    <Content Include="Scripts\app\controller\AuthorController.js" />
+    <Content Include="Scripts\app\controller\authorController.js" />
     <Content Include="Scripts\app\controller\bookAddController.js" />
     <Content Include="Scripts\app\controller\checkOutController.js" />
-    <Content Include="Scripts\app\controller\ForgotPasswordController.js" />
-    <Content Include="Scripts\app\controller\getTokenController.js" />
+    <Content Include="Scripts\app\controller\confirmRegisterController.js" />
+    <Content Include="Scripts\app\controller\forgotPasswordController.js" />
+    <Content Include="Scripts\app\controller\registerExternalController.js" />
     <Content Include="Scripts\app\controller\homeController.js" />
     <Content Include="Scripts\app\controller\indexController.js" />
     <Content Include="Scripts\app\controller\loginController.js" />
     <Content Include="Scripts\app\controller\loginModalController.js" />
-    <Content Include="Scripts\app\controller\ModalOrderDetailCtrl.js" />
+    <Content Include="Scripts\app\controller\modalOrderDetailCtrl.js" />
     <Content Include="Scripts\app\controller\profileController.js" />
     <Content Include="Scripts\app\controller\registerController.js" />
+    <Content Include="Scripts\app\services\utility.js" />
     <Content Include="Scripts\app\directives\simpledirective.js" />
     <Content Include="PartialViews\ViewCart.html" />
     <Content Include="Scripts\app\controller\bookDetailController.js" />
@@ -477,7 +463,16 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55387</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://www.angularbookapp.com.au</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -7,9 +8,11 @@ using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Twitter;
 using Owin;
 using BooksAngularWithApi.Providers;
 using BooksAngularWithApi.Models;
@@ -27,7 +30,7 @@ namespace BooksAngularWithApi
         {
             // Enable CORS
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-        
+
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -52,13 +55,17 @@ namespace BooksAngularWithApi
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: "0000000048125371",
-                clientSecret: "8xLdHUnociFyZZmDS6eI1EqZmc39mn5r");
 
-            app.UseTwitterAuthentication(
-                consumerKey: "I18QDmLt0HFwnNZKnoIkZHCQb",
-                consumerSecret: "vO6U0IsDbVjzR3I6lpKY6htfUR8n9ccMpTuQjsxg50IrU2n5YM");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: ConfigurationManager.AppSettings["MicrosoftClientId"],
+                clientSecret: ConfigurationManager.AppSettings["MicrosoftClientSecret"]);
+
+            app.UseTwitterAuthentication(new TwitterAuthenticationOptions
+                    {
+                        ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                        ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                        CallbackPath = new PathString("/signin-twitter")
+                    });
 
             //app.UseFacebookAuthentication(
             //    appId: "",
@@ -68,8 +75,8 @@ namespace BooksAngularWithApi
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "797691327397-ach2s67j1rpeo0i5sajbb5cll8ps9e1r.apps.googleusercontent.com",
-                ClientSecret = "_MLT5rS2Es611YPCev5RRUw7"
+                ClientId = ConfigurationManager.AppSettings["GoogleClientID"],
+                ClientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"]
             });
         }
     }

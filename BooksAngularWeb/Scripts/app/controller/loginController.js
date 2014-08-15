@@ -29,12 +29,14 @@
     ]);
 
     var ExternalLoginProviders = BooksApp.controller('ExternalLoginProviders', [
-        '$scope','$location','$window', 'AccountService', function($scope,$location,$window, AccountService) {
-            AccountService.GetExternalProviders().then(function(response) {
+        '$scope', '$location', '$http', '$window', 'AccountService', function ($scope, $location, $http, $window, AccountService) {
+
+            AccountService.GetExternalProviders().then(function (response) {
                 $scope.Providers = response.data;
             });
 
-            $scope.GotoUrl = function(url) {
+            $scope.GotoUrl = function (url) {
+
                 $window.location.href = 'http://api.angularbookapp.com.au:57212/' + url;
             }
         }

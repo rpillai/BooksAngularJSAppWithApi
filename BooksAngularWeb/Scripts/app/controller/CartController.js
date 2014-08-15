@@ -47,10 +47,7 @@
                             }
                         });
                     }
-
-                    
                 }
-                
 
                 $scope.$on('CartChanged', function (event, data) {
                     $scope.CartItems = data;

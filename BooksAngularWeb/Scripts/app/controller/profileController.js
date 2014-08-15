@@ -7,9 +7,18 @@
             $scope.Orders = response.data;
         });
 
-        $scope.GetOrderDetails = function (id) {
+        $scope.GetUserProfile = function() {
+            if (angular.isUndefined($scope.userdata)) {
+                AccountService.GetUserInfo().then(function(response) {
+                    $scope.userdata = response.data;
+                }, function(error) {
+                    $scope.message = 'An error occurred while getting user data';
+                });
+            }
+        }
 
-            OrderService.GetOrderDetailsByOrder(id).then(function(response) {
+        $scope.GetOrderDetails = function (id) {
+            OrderService.GetOrderDetailsByOrder(id).then(function (response) {
 
                 $scope.OrderDetails = response.data;
 

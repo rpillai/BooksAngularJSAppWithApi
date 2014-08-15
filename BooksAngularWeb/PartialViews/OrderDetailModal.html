@@ -14,10 +14,10 @@
             </thead>
             <tbody>
                 <tr ng-repeat="OrderDetail in OrderDetails">
-                    <td>{{OrderDetail.title}}</td>
-                    <td>{{OrderDetail.unitPrice | currency}}</td>
-                    <td>{{OrderDetail.qty}}</td>
-                    <td>{{OrderDetail.lineTotal | currency}}</td>
+                    <td><p class="small">{{OrderDetail.title}}</p></td>
+                    <td><p class="small">{{OrderDetail.unitPrice | currency}}</p></td>
+                    <td><p class="small">{{OrderDetail.qty}}</p></td>
+                    <td><p class="small">{{OrderDetail.lineTotal | currency}}</p></td>
                 </tr>
             </tbody>
         </table>

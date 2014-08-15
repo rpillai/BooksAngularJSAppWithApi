@@ -1,15 +1,16 @@
-﻿(function() {
+﻿( function() {
     var HomeController = BooksApp.controller('HomeController', [
-        '$scope','$location', '$routeParams', function($scope,$location,$routeParams) {
-            var tokens = $location.path().split('&');
+        '$scope', '$location', '$window', 'AccountService','UtilityService', function ($scope, $location, $window, AccountService, UtilityService) {
 
-            $scope.access_token = tokens[0].slice(14);
-            $scope.token_type = tokens[1];
-            $scope.expires_in = tokens[2];
+            var tokens = UtilityService.GetTokensFromUrl($location.path());
+
+            $scope.access_token = tokens.access_token;
+            $scope.token_type = tokens.token_type;
+            $scope.expires_in = tokens.expires_in;
 
             if ($scope.access_token && $scope.token_type) {
-                $location.path('/#/GetToken');
-                $scope.$apply();
+                AccountService.SetAuthData($scope.access_token);
+                $location.path('/RegisterExternal');
             }
         }
     ]);

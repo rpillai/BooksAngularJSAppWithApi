@@ -1,0 +1,21 @@
+﻿<div class="col-md-12" ng-controller="RegisterExternalController">
+    <form name="RegisterExternalForm" ng-hide="HasRegistered">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="text-primary">
+                    You've successfully authenticated with {{LoginProvider}}. Please enter a email for this</p>
+                <p class="text-primary">
+                    site below and click the Register button to finish the logging in.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="email">Email</label>
+            <input type="email" name="email" ng-model="email" class="form-control" required autofocus />
+            <span class="glyphicon glyphicon-stats" ng-show="$RegisterExternalForm.$email.$invalid"></span>
+        </div>
+        <button class="btn btn-default" ng-click="signup(email)">Register</button>
+        {{$scope.message}}
+    </form>
+
+</div>

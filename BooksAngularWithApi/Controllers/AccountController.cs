@@ -309,8 +309,8 @@ namespace BooksAngularWithApi.Controllers
                         provider = description.AuthenticationType,
                         response_type = "token",
                         client_id = Startup.PublicClientId,
-                        //redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-                        redirect_uri = HttpUtility.UrlPathEncode(returnUrl),
+                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                        //redirect_uri = HttpUtility.UrlPathEncode(returnUrl),
                         state = state
                     }),
                     State = state
@@ -355,6 +355,7 @@ namespace BooksAngularWithApi.Controllers
             }
 
             var info = await Authentication.GetExternalLoginInfoAsync();
+
             if (info == null)
             {
                 return InternalServerError();

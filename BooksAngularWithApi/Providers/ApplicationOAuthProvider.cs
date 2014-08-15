@@ -65,12 +65,11 @@ namespace BooksAngularWithApi.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            // Resource owner password credentials does not provide a client ID.
+            //Resource owner password credentials does not provide a client ID.
             if (context.ClientId == null)
             {
                 context.Validated();
             }
-
             return Task.FromResult<object>(null);
         }
 
@@ -81,7 +80,8 @@ namespace BooksAngularWithApi.Providers
                 Uri expectedRootUri = new Uri(context.Request.Uri, "/");
 
                 if (expectedRootUri.AbsoluteUri == context.RedirectUri
-                    || context.RedirectUri == "http://www.angularbookapp.com.au/")
+                    || context.RedirectUri == "http://www.angularbookapp.com.au/"
+                    || context.RedirectUri == "http://www.angularbookapp.com.au/ConfirmRegister")
                 {
                     context.Validated();
                 }

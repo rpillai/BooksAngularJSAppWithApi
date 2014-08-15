@@ -123,6 +123,7 @@ namespace BooksAngularWithApi.Controllers
         [Authorize]
         [HttpGet]
         [ResponseType(typeof(IQueryable<Order>))]
+        [ActionName("OrdersForUser")]
         public async Task<IHttpActionResult> OrdersForUser(string userName)
         {
             var userID = HttpContext.Current.User.Identity.GetUserId();
