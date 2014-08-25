@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BooksAngularWithApi.Controllers
 {
+    [RoutePrefix("api/Orders")]
     public class OrdersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -123,7 +124,7 @@ namespace BooksAngularWithApi.Controllers
         [Authorize]
         [HttpGet]
         [ResponseType(typeof(IQueryable<Order>))]
-        [ActionName("OrdersForUser")]
+        [Route("users/{username}/Orders",Name="GetOrdersForUser")]
         public async Task<IHttpActionResult> OrdersForUser(string userName)
         {
             var userID = HttpContext.Current.User.Identity.GetUserId();
@@ -133,11 +134,8 @@ namespace BooksAngularWithApi.Controllers
             {
                 return NotFound();
             }
-
             return Ok(orders);
-
         }
-
 
         protected override void Dispose(bool disposing)
         {

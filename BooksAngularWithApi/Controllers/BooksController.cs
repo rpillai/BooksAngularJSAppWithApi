@@ -17,15 +17,18 @@ using WebGrease.Css.Extensions;
 namespace BooksAngularWithApi.Controllers
 {
     [Authorize]
+    [RoutePrefix("api/Books")]
     public class BooksController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Books
         [AllowAnonymous]
-        public IQueryable<Book> GetBooks()
+        [ResponseType(typeof(IQueryable<Book>))]
+        public async Task<IHttpActionResult> GetBooks()
         {
-            return db.Books.Include(b => b.Author).Include(b => b.Reviews);
+            var books = await db.Books.Include(b => b.Author).ToListAsync();
+            return Ok(books);
         }
 
         // GET: api/Books/5
@@ -58,9 +61,6 @@ namespace BooksAngularWithApi.Controllers
             {
                 return NotFound();
             }
-
-
-
             return Ok(book);
         }
 

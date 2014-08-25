@@ -13,6 +13,7 @@ using BooksAngularWithApi.Models;
 
 namespace BooksAngularWithApi.Controllers
 {
+    [RoutePrefix("api/OrderDetails")]
     public class OrderDetailsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -103,6 +104,8 @@ namespace BooksAngularWithApi.Controllers
         }
 
 
+        [Route("OrderDetailsByOrder")]
+        [ActionName("OrderDetailsByOrder")]
         public async Task<IHttpActionResult> GetOrderDetailsByOrder(int id)
         {
             var orderDetails = await db.OrderDetails.Include(or => or.BookId).Where(o => o.OrderId == id).Select(r =>

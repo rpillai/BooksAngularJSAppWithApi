@@ -3,8 +3,7 @@
     <div>
         <ul class="pager" style="padding-left: 15px; padding-right: 15px;text-align: center">
             <li class="previous" ng-disabled="{{currentIndex === 0}}">
-                
-                    <a ng-href="" href="" ng-click="GetNextBooks('P')"><span class="glyphicon glyphicon-backward"></span> Prev</a>
+                <a ng-href="" href="" ng-click="GetNextBooks('P')"><span class="glyphicon glyphicon-backward"></span> Prev</a>
             </li>
             <li class="next">
                 <a ng-href="" href="" ng-click="GetNextBooks('N')">Next <span class="glyphicon glyphicon-forward"></span></a>
@@ -22,14 +21,14 @@
                 </a>
                 <div class="caption">
                     <div style="overflow: hidden">
-                        <a ng-href="#/Books/{{Book.id}}" ng-click="GetBookDetails(Book.id)">
+                        <a ng-href="/Books/{{Book.id}}">
                             <h5>{{Book.title}}</h5>
                         </a>
                     </div>
                     <div>
-                        <span class="text small"> {{Book.author.name}}</span> <span class="text-danger small">{{Book.price | currency}}</span>
+                        <span class="text-primary small"> {{Book.author.name}}</span> <span class="text-danger small">{{Book.price | currency}}</span>
                         <button class="btn btn-primary btn-xs pull-right" ng-click="AddToCart(Book)">
-                            <span class="glyphicon glyphicon-shopping-cart glyphicon-resize-small"></span>
+                            <span class="fa fa-shopping-cart small"></span>
                             Buy
                         </button>
                     </div>

@@ -12,6 +12,10 @@
                 AccountService.SetAuthData($scope.access_token);
                 $location.path('/RegisterExternal');
             }
+
+            $scope.GotoBooks = function() {
+                $location.path('/Books');
+            }
         }
     ]);
 })();

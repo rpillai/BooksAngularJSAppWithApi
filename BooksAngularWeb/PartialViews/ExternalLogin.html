@@ -1,0 +1,23 @@
+﻿<div ng-controller="ExternalLoginProviders">
+    <div class="panel panel-default panel-body">
+        <div class="panel-heading">
+            <h5 class="panel-title">
+                Login using another service
+            </h5>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="btn-group-justified">
+                    <div class="col-md-4" ng-repeat="Provider in Providers">
+                        <button type="button" class="btn btn-primary" ng-click="GotoUrl(Provider.url)">
+                            <i class="Provider.iconname"></i> {{Provider.name}}
+                        </button>
+                        <p ng-model="Provider.iconname">{{Provider.iconname}}</p>
+                        <input type="hidden" ng-model="Provider.url" value="{{Provider.url}}" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

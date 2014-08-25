@@ -18,9 +18,28 @@
                 });
             }
 
-            return {
-                GetAuthors: _getAuthors
+            var _searchByAuthorName = function(searchString) {
+                
             }
+
+            var _addAuthor = function(authorName) {
+                return $http.post(
+                    baseUrl,
+                    {Name : authorName}
+                ).then(function(response) {
+                    if (response.status === 201) {
+                        return response.data;
+                    }
+                }, function(error) {
+                    return error;
+                });
         }
-    ]);
+
+            return {
+        GetAuthors: _getAuthors,
+        SearchByName: _searchByAuthorName,
+        AddAuthor: _addAuthor
+}
+}
+]);
 })();

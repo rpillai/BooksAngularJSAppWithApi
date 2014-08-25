@@ -17,11 +17,11 @@
             BookService.GetBooks().then(onGetBookSuccess);
         };
 
-        $scope.GetBookDetails = function (id) {
-            BookService.GetBookByID(id).then(function (response) {
+        //$scope.GetBookDetails = function (id) {
+        //    BookService.GetBookByID(id).then(function (response) {
 
-            });
-        };
+        //    });
+        //};
 
         $scope.GetNextBooks = function (next) {
 

@@ -14,8 +14,11 @@
                 });
 
                 $scope.SaveBook = function(Book) {
-                    BookService.AddBook(Book).then(function (response) {
-
+                    BookService.AddBook(Book).then(
+                        function (response) {
+                            if (response.status === 201) {
+                                $scope.Message = 'Book added successfully.';
+                            }
                     }, function(error) {
 
                     });

@@ -1,14 +1,30 @@
 ﻿<div ng-controller="AuthorController">
-    <form class="form-inline" novalidate ng-submit="SearchAuthor()">
-        <div class="form-group">
-            <input type="search" placeholder="Search Author" autofocus required class="form-control" ng-model="searchstring" />
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-    </form>
-    
     <div class="row">
-        <div class="col-md-6" ng-repeat="Author in Authors">
-            {{Author.name}}
+        <div class="col-md-6">
+            <form class="form-inline" novalidate ng-submit="SearchAuthor()">
+                <div class="form-group">
+                    <input type="search" placeholder="Search Author" autofocus required class="form-control" ng-model="searchstring" />
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            <br/>
+            <div class="col-md-6" ng-repeat="Author in Authors">
+                {{Author.name}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form class="form-horizontal" novalidate>
+                <fieldset>
+                    <legend>Add Author</legend>
+                </fieldset>
+                <div class="form-group">
+                    <label class="control-label">Author Name</label>
+                    <input type="text" ng-model="AuthorName" class="form-control" required placeholder="Author Name" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" ng-click="AddAuthor()">Add Author</button>
+                </div>
+            </form>
         </div>
     </div>
 

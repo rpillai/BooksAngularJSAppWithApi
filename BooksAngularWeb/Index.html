@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store - Angular JS</title>
-    <link href="css/bootstrap-theme.css" rel="stylesheet" />
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/bootstrap-theme.css" rel="stylesheet" />
-    <link href="css/Site.css" rel="stylesheet" />
-    <link href="css/animate.css" rel="stylesheet" />
+    <link href="/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="/css/Site.css" rel="stylesheet" />
+    <link href="/css/animate.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
     <link href="favicon.ico" rel="shortcut-icon" />
     <base href="/" />
 </head>
 <body ng-app="BooksApp" ng-cloak>
     <div ng-controller="HomeController">
     </div>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="nav navbar navbar-inverse  navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,43 +28,59 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/Home" class="hidden-sm hidden-xs">Home</a></li>
-                    <li><a href="/Books">Books</a></li>
-                    <li><a href="/Authors">Authors</a></li>
+                    <li><a href="/Home" class="hidden-sm hidden-xs"><i class="fa fa-home fa-fw"></i> Home</a></li>
+                    <li><a href="/Books"><i class="fa fa-book fa-fw"></i> Books</a></li>
+                    <li><a href="/Authors"><i class="fa fa-adn fa-fw"></i> Authors</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" role="login" ng-controller="LoginController" ng-hide="AuthData.isAuth">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Email" ng-model="login.email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-sm" placeholder="Password" ng-model="login.password" required>
-                    </div>
-                    <button type="submit" class="btn btn-default btn-sm" ng-click="Login(login)">Submit</button>
-                    <div class="nav-divider"></div>
-                    <a ng-href="/ForgotPassword" class="navbar-link">Forgot Password?</a>
-                    <a ng-href="/Register" class="navbar-link">Register</a>
-                </form>
-
-                <ul class="nav navbar-nav navbar-right" ng-controller="IndexController" ng-show="AuthData.isAuth">
-                    <li> <p class="navbar-text"><a ng-href="#/Profile" class="navbar-link">{{AuthData.userName}}</a></p></li>
-                    <li><a ng-href="" ng-click="Logout()">Logout</a></li>
-                </ul>
-                <div class="nav navbar-nav navbar-right">
-                    <div class="" ng-controller="CartController">
-                        <p class="navbar-text"><a ng-href="#/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span>  Items <span class="badge">{{count}}</span></a></p>
+                <div class="navbar-right" style="padding-top:15px;padding-bottom:0px" ng-controller="IndexController" ng-hide="AuthData.isAuth">
+                    <ul>
+                        <li class="small list-inline" style="padding-bottom: 3px">
+                            <a href="/Login" class="navbar-link" ng-hide="AuthData.isAuth"> Hello! <i class="fa fa-sign-in fa-fw"></i> Sign-in </a>
+                        </li>
+                        <li class="small list-inline">
+                            <ul class="list-inline">
+                                <li class="list-unstyled"><a ng-href="/ForgotPassword" class="navbar-link"><i class="fa fa-key fa-fw"></i> Forgot Password?</a></li>
+                                <li class="list-unstyled"><a ng-href="/Register" class="navbar-link"><i class="fa fa-user fa-fw"></i> Register</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-controller="IndexController" ng-show="AuthData.isAuth">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-href="/Profile" class="navbar-link">{{AuthData.userName}}</a></li>
+                        <li><a ng-href="" class="navbar-link" ng-click="Logout()">Logout <i class="fa fa-sign-out fa-fw"></i></a></li>
+                    </ul>
+                </div>
+                <div class="navbar-right">
+                    <div ng-controller="CartController">
+                        <p class="navbar-text">
+                            <a ng-href="/ViewCart" class="navbar-link"><i class="fa fa-shopping-cart fa-fw"></i> Items <span class="badge">{{count}}</span></a>
+                        </p>
                     </div>
                 </div>
+
             </div>
+            <!--<form class="navbar-form navbar-right" role="login" ng-controller="LoginController" ng-hide="AuthData.isAuth">
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" placeholder="Email" ng-model="login.email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control input-sm" placeholder="Password" ng-model="login.password" required>
+                </div>
+                <button type="submit" class="btn btn-default btn-sm" ng-click="Login(login)">Submit</button>
+                <div class="nav-divider"></div>
+            </form>-->
         </div>
     </div>
     <div class="container body-content" style="margin-top: 30px" ng-view>
     </div>
     <div class="container">
         <footer>
-            <span class="glyphicon glyphicon-copyright-mark"></span> 2014 Books Application
+            &copy;2014 Books Application
         </footer>
     </div>
-
+    
+    <!-- libraries -->
 
     <script type="text/javascript" src="Scripts/lib/angular/angular.js"></script>
     <script type="text/javascript" src="Scripts/lib/angular/angular-cookies.js"></script>
@@ -109,7 +126,13 @@
     <script type="text/javascript" src="Scripts/app/controller/registerExternalController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/homeController.js"></script>
     <script type="text/javascript" src="Scripts/app/controller/confirmRegisterController.js"></script>
-    
+
+    <!-- Directives -->
+
+    <script type="text/javascript" src="Scripts/app/directives/showErrorsDirective.js"></script>
+    <script type="text/javascript" src="Scripts/app/directives/externalLogin.js"></script>
+
+
 
 </body>
 </html>

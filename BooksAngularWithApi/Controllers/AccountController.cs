@@ -261,10 +261,8 @@ namespace BooksAngularWithApi.Controllers
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
+                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager, OAuthDefaults.AuthenticationType);
+                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager, CookieAuthenticationDefaults.AuthenticationType);
 
                 AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
@@ -378,7 +376,7 @@ namespace BooksAngularWithApi.Controllers
         }
 
         [AllowAnonymous]
-        [Route("ResetPassword")]
+        [Route("ResetPassword",Name = "ResetPassword")]
         [OverrideAuthentication]
         [OverrideActionFilters]
         public async Task<IHttpActionResult> GetResetPassword(string email)
@@ -400,8 +398,17 @@ namespace BooksAngularWithApi.Controllers
             return Ok();
         }
 
-        
 
+        [Route("HasPasswordSet")]
+        public bool HasPasswordSet()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            if (user != null)
+                return user.PasswordHash == null;
+
+            return false;
+        }
 
          
 

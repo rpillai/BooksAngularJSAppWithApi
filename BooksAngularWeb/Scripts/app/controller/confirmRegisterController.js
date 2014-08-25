@@ -11,8 +11,10 @@
             $scope.expires_in = tokens.expires_in;
 
             if ($scope.access_token && $scope.token_type) {
-                AccountService.SetAuthData($scope.access_token);
-                
+                AccountService.GetUserInfo().then(function(response) {
+                    AccountService.SetAuthData($scope.access_token, response.data.email);
+                    $location.path('/Books');
+                });
             }
         }
     ]);

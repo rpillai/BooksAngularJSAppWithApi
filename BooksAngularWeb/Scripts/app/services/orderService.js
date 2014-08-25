@@ -19,10 +19,8 @@
                     url: baseOrderUrl,
                     data: order
                 }).then(function (response) {
-
                     if (response.status === 201)
                         CartService.ClearCart();
-
                     return response;
                 }, function(error) {
                     return error;
@@ -32,7 +30,7 @@
             var _getOrdersForUser = function(username) {
                 return $http({
                     method: 'GET',
-                    url: baseOrderUrl + 'OrdersForUser?username=' + username
+                    url: baseOrderUrl + 'users/' + username + '/Orders'
                 }).then(function(response) {
                     return response;
                 });
@@ -41,7 +39,7 @@
             var _getOrderDetailsByOrderId = function(id) {
                 return $http({
                     method: 'GET',
-                    url: 'http://api.angularbookapp.com.au:57212/api/orderdetails/GetOrderDetailsByOrder?id=' + id
+                    url: 'http://api.angularbookapp.com.au:57212/api/orderdetails/OrderDetailsByOrder?id=' + id
                 }).then(function (response) {
                     return response;
                 });

@@ -1,14 +1,20 @@
 ﻿(function () {
     'use strict';
 
-    var GetTokenController = BooksApp.controller('RegisterExternalController', [
-        '$scope', '$routeParams', '$http', '$window', 'AccountService', function ($scope, $routeParams, $http, $window, AccountService) {
+    var RegisterExternalController = BooksApp.controller('RegisterExternalController', [
+        '$scope', '$routeParams', '$http', '$location', '$window', 'AccountService',
+        function ($scope, $routeParams, $http, $location, $window, AccountService) {
 
             $http.get('http://api.angularbookapp.com.au:57212/api/account/UserInfo').then(function (response) {
+
                 if (response) {
                     $scope.HasRegistered = response.data.hasRegistered;
                     $scope.LoginProvider = response.data.loginProvider;
-                    AccountService.AuthData.userName = response.data.email;
+
+                    if (angular.isUndefined($scope.HasRegistered) === false && $scope.HasRegistered) {
+                        AccountService.SetAuthUserName(response.data.email);
+                        $location.path('/Books');
+                    }
                 }
             }, function (error) {
                 console.log(error);

@@ -1,6 +1,6 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 70px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -55,4 +55,12 @@ footer {
     border-left: rgb(221,221,221) solid thin;
     border-right: rgb(221,221,221) solid thin;
     padding-top: 15px;
+}
+
+.form-group .help-block {
+    display: none;
+}
+
+.form-group.has-error .help-block {
+    display: block;
 }

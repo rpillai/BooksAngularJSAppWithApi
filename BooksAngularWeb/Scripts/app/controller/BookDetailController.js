@@ -1,8 +1,8 @@
 ﻿(function() {
     var BookDetailController = BooksApp.controller('BookDetailController', [
-           '$scope','$routeParams','BookService', 'ReviewService',
+           '$scope','$routeParams','BookService', 'ReviewService','CartService',
 
-            function ($scope,$routeParams, BookService, ReviewService) {
+            function ($scope,$routeParams, BookService, ReviewService, CartService) {
 
                 $scope.Book = BookService.BookDetailData;
                 $scope.BookId = $routeParams.BookId;
@@ -24,9 +24,11 @@
                     });
                 };
 
-                //$scope.$on('OnBookDetailGet', function (event, data) {
-                    
-                //});
+                $scope.AddToCart = function () {
+                    if ($scope.Book) {
+                        CartService.AddItem($scope.Book.id, $scope.Book.title, 1, $scope.Book.price);
+                    }
+                }
             }
     ]);
 })();

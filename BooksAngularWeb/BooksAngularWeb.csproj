@@ -61,12 +61,16 @@
   <ItemGroup>
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="PartialViews\Author.html" />
     <Content Include="PartialViews\BookAdd.html" />
     <Content Include="PartialViews\BookDetail.html" />
     <Content Include="PartialViews\CheckOut.html" />
     <Content Include="PartialViews\ConfirmRegister.html" />
+    <Content Include="PartialViews\ExternalLogin.html" />
     <Content Include="PartialViews\ForgotPassword.html" />
     <Content Include="PartialViews\RegisterExternal.html" />
     <Content Include="PartialViews\Home.html" />
@@ -87,6 +91,8 @@
     <Content Include="Scripts\app\controller\modalOrderDetailCtrl.js" />
     <Content Include="Scripts\app\controller\profileController.js" />
     <Content Include="Scripts\app\controller\registerController.js" />
+    <Content Include="Scripts\app\directives\externalLogin.js" />
+    <Content Include="Scripts\app\directives\showErrorsDirective.js" />
     <Content Include="Scripts\app\services\utility.js" />
     <Content Include="Scripts\app\directives\simpledirective.js" />
     <Content Include="PartialViews\ViewCart.html" />
@@ -115,6 +121,10 @@
     <Content Include="Scripts\lib\angular\errors.json" />
     <Content Include="Scripts\lib\angular\version.json" />
     <Content Include="packages.config" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

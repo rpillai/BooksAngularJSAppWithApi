@@ -8,7 +8,7 @@
                 $scope.CartItems = CartService.CartItems;
 
                 var OnSuccessLogin = function (response) {
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         $location.path('/');
                     } else {
                         if (response.data.error) {
@@ -22,9 +22,18 @@
                 };
 
                 $scope.Login = function (Login) {
-                    AccountService.Login(Login.email, Login.password)
-                                .then(OnSuccessLogin, OnError);
-                };
+
+                    $scope.$broadcast('show-errors-check-validity');
+
+                    if ($scope.loginForm.$valid) {
+                        AccountService.Login(Login.email, Login.password)
+                            .then(OnSuccessLogin, OnError);
+                    }
+                }
+
+                $scope.Reset = function() {
+                    $scope.$broadcast('show-errors-reset');
+                }
             }
     ]);
 
@@ -36,7 +45,6 @@
             });
 
             $scope.GotoUrl = function (url) {
-
                 $window.location.href = 'http://api.angularbookapp.com.au:57212/' + url;
             }
         }

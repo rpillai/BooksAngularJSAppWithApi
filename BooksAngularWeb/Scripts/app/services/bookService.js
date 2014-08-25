@@ -25,7 +25,6 @@
                     'method': 'GET',
                     'url': 'http://api.angularbookapp.com.au:57212/api/Books/' + id
                 }).then(function (response) {
-
                     BookDetailData = response.data;
                     $rootScope.$broadcast('OnBookDetailGet', BookDetailData);
                     return response;

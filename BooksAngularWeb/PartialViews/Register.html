@@ -1,32 +1,39 @@
-﻿<div class="col-md-4 col-md-push-4">
-    <div class=" panel panel-default panel-body">
-        <div class="col-md-offset-1" ng-controller="RegisterController">
-            <form name="loginForm" ng-controller="RegisterController" class="form-horizontal">
-                <fieldset>
-                    <legend>Register</legend>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" ng-model="register.email" placeholder="Email" class="form-control" />
+﻿<div class="row">
+    <div class="col-md-4 col-md-offset-2">
+        <div class=" panel panel-default panel-body">
+            <div class="col-md-offset-1" ng-controller="RegisterController">
+                <form name="loginForm" ng-controller="RegisterController" class="form-horizontal" novalidate>
+                    <fieldset>
+                        <legend>Register a local account.</legend>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" ng-model="register.email" placeholder="Email" class="form-control" autofocus required />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" ng-model="register.password" placeholder="Password" required class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmpassword">Confirm Password</label>
+                            <input type="password" name="confirmpassword" ng-model="register.confirmpassword" required placeholder="Confirm Password" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" ng-click="RegisterClick(loginForm)">
+                               <i class="fa fa-user"></i> Register
+                            </button>
+                        </div>
+                    </fieldset>
+                    <div class="form-group" ng-show="message" ng-repeat="error in message">
+                        <p class="text-danger">{{error}}</p>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" ng-model="register.password" placeholder="Password" class="form-control" />
+                    <div>
+                        <p class="text-info">{{successmessage}}</p>
                     </div>
-                    <div class="form-group">
-                        <label for="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword" ng-model="register.confirmpassword" placeholder="Confirm Password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" ng-click="RegisterClick(loginForm)">Register</button>
-                    </div>
-                </fieldset>
-                <div class="form-group" ng-show="message" ng-repeat="error in message">
-                    <p class="text-danger">{{error}}</p>
-                </div>
-                <div>
-                    <p class="text-info">{{successmessage}}</p>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="col-md-4" external-login>
+        
     </div>
 </div>
