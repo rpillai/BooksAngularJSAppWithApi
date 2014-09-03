@@ -65,6 +65,7 @@
     <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Index.html" />
     <Content Include="PartialViews\Author.html" />
     <Content Include="PartialViews\BookAdd.html" />
     <Content Include="PartialViews\BookDetail.html" />
@@ -93,6 +94,7 @@
     <Content Include="Scripts\app\controller\registerController.js" />
     <Content Include="Scripts\app\directives\externalLogin.js" />
     <Content Include="Scripts\app\directives\showErrorsDirective.js" />
+    <Content Include="Scripts\app\services\bookResService.js" />
     <Content Include="Scripts\app\services\utility.js" />
     <Content Include="Scripts\app\directives\simpledirective.js" />
     <Content Include="PartialViews\ViewCart.html" />
@@ -139,7 +141,6 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="css\Site.css" />
-    <Content Include="Index.html" />
     <Content Include="PartialViews\Login.html" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\services\accountServices.js" />
@@ -456,11 +457,16 @@
     <Content Include="Scripts\lib\respond\respond.js" />
     <Content Include="Scripts\lib\respond\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\lib\jquery\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

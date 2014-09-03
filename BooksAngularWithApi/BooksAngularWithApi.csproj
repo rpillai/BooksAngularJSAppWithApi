@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
@@ -177,13 +178,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407300420288_Initialise.cs" />
-    <Compile Include="Migrations\201407300420288_Initialise.Designer.cs">
-      <DependentUpon>201407300420288_Initialise.cs</DependentUpon>
+    <Compile Include="Migrations\201408290324098_Initialise.cs" />
+    <Compile Include="Migrations\201408290324098_Initialise.Designer.cs">
+      <DependentUpon>201408290324098_Initialise.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -215,8 +217,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407300420288_Initialise.resx">
-      <DependentUpon>201407300420288_Initialise.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201408290324098_Initialise.resx">
+      <DependentUpon>201408290324098_Initialise.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

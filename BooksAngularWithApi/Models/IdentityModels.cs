@@ -21,6 +21,8 @@ namespace BooksAngularWithApi.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public ICollection<Address> Addresses { get; set; } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -36,10 +38,6 @@ namespace BooksAngularWithApi.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,8 +45,12 @@ namespace BooksAngularWithApi.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<BooksAngularWithApi.Models.OrderDetail> OrderDetails { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
-        public System.Data.Entity.DbSet<BooksAngularWithApi.Models.Order> Orders { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'ngSanitize']);
+var BooksApp = angular.module('BooksApp', ['ngRoute', 'ngCookies','ngResource', 'ui.bootstrap', 'ngSanitize']);
 
 BooksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.

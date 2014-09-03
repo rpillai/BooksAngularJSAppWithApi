@@ -1,8 +1,9 @@
 ﻿(function () {
     var BookAddController = BooksApp.controller('BookAddController', [
-           '$scope','$filter', 'BookService', 'AuthorService',
+           '$scope','$filter', 'BookResService', 'AuthorService',
 
-            function ($scope,$filter, BookService, AuthorService) {
+            function ($scope, $filter, BookResService, AuthorService) {
+
                 var orderBy = $filter('orderBy');
 
                 AuthorService.GetAuthors().then(function (response) {
@@ -13,15 +14,21 @@
                         
                 });
 
-                $scope.SaveBook = function(Book) {
-                    BookService.AddBook(Book).then(
-                        function (response) {
-                            if (response.status === 201) {
-                                $scope.Message = 'Book added successfully.';
-                            }
-                    }, function(error) {
+                $scope.SaveBook = function (Book) {
+                    BookResService.save(Book, function (data) {
 
+                    }, function(error) {
+                        console.log(error);
                     });
+
+                    //BookService.AddBook(Book).then(
+                    //    function (response) {
+                    //        if (response.status === 201) {
+                    //            $scope.Message = 'Book added successfully.';
+                    //        }
+                    //}, function(error) {
+
+                    //});
                 }
             }
     ]);

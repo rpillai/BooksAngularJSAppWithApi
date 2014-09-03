@@ -16,14 +16,12 @@ using WebGrease.Css.Extensions;
 
 namespace BooksAngularWithApi.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/Books")]
     public class BooksController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Books
-        [AllowAnonymous]
         [ResponseType(typeof(IQueryable<Book>))]
         public async Task<IHttpActionResult> GetBooks()
         {
@@ -64,8 +62,38 @@ namespace BooksAngularWithApi.Controllers
             return Ok(book);
         }
 
+        // GET: api/Books/5/IncludeAuthor
+        [ResponseType(typeof(Book))]
+        public async Task<IHttpActionResult> GetBook(int id, bool includeAuthor)
+        {
+            Book book = null;
+
+            if (includeAuthor)
+            {
+               book = await
+                        db.Books.Include(ba => ba.Author)
+                           .Where(b => b.Id == id)
+                           .FirstOrDefaultAsync();
+            }
+            else
+            {
+                book = await db.Books.FindAsync(id);
+            }
+           
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }
+
+
+
+
+
         // PUT: api/Books/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public async Task<IHttpActionResult> PutBook(int id, Book book)
         {
             if (!ModelState.IsValid)
@@ -101,6 +129,7 @@ namespace BooksAngularWithApi.Controllers
 
         // POST: api/Books
         [ResponseType(typeof(Book))]
+        [Authorize]
         public async Task<IHttpActionResult> PostBook(Book book)
         {
             if (!ModelState.IsValid)
@@ -116,6 +145,7 @@ namespace BooksAngularWithApi.Controllers
 
         // DELETE: api/Books/5
         [ResponseType(typeof(Book))]
+        [Authorize]
         public async Task<IHttpActionResult> DeleteBook(int id)
         {
             Book book = await db.Books.FindAsync(id);
@@ -130,6 +160,41 @@ namespace BooksAngularWithApi.Controllers
             return Ok(book);
         }
 
+        [ResponseType(typeof(List<Review>))]
+        [Route("{id}/Reviews")]
+        public async Task<IHttpActionResult> GetReviews(int id)
+        {
+            var reviews = await db.Books.Include("Reviews").Where(b => b.Id == id).ToListAsync();
+            return Ok(reviews);
+        }
+
+        [ResponseType(typeof(List<Book>))]
+        [Route("Author/{authorName}")]
+        public async Task<IHttpActionResult> GetBooksByAuthor(string authorName)
+        {
+            var reviews = await db.Books.Where(book => book.Author.Name.Contains(authorName)).ToListAsync();
+            return Ok(reviews);
+        }
+
+        [ResponseType(typeof(List<Book>))]
+        [Route("Title/{title}")]
+        public async Task<IHttpActionResult> GetBooksByTitle(string title)
+        {
+            var reviews = await db.Books.Where(book => book.Title.Contains(title)).ToListAsync();
+            return Ok(reviews);
+        }
+
+        [ResponseType(typeof(decimal?))]
+        [Route("{id}/Price")]
+        public async Task<IHttpActionResult> GetBookPrice(int id)
+        {
+            var book = await db.Books.FindAsync(id);
+
+            if(book != null)
+                return Ok(book.Price);
+
+            return NotFound();
+        }
 
         protected override void Dispose(bool disposing)
         {

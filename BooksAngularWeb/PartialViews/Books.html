@@ -1,44 +1,59 @@
 ﻿<a ng-href="#/BookAdd/">Add Book</a>
-<div class="row" style="border:1px solid;margin-top: 5px;border-radius: 5px">
+<div ng-controller="BookController">
     <div>
-        <ul class="pager" style="padding-left: 15px; padding-right: 15px;text-align: center">
-            <li class="previous" ng-disabled="{{currentIndex === 0}}">
-                <a ng-href="" href="" ng-click="GetNextBooks('P')"><span class="glyphicon glyphicon-backward"></span> Prev</a>
-            </li>
-            <li class="next">
-                <a ng-href="" href="" ng-click="GetNextBooks('N')">Next <span class="glyphicon glyphicon-forward"></span></a>
-            </li>
-            <li>
-                <h4 class="caption"> Popular Books</h4>    
-            </li>
-        </ul>
-    </div>
-    <div ng-controller="BookController" ng-repeat="Book in localBooks | limitTo : 4" class="animated lightSpeedIn" ng-init="Index = $index">
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail" style="margin-top: 10px">
-                <a href="" ng-click="GetBookDetails(Book.id)">
-                    <img src="http://placehold.it/200x200/" alt="{{Book.Title}}" class="img-rounded img-responsive" />
-                </a>
-                <div class="caption">
-                    <div style="overflow: hidden">
-                        <a ng-href="/Books/{{Book.id}}">
-                            <h5>{{Book.title}}</h5>
-                        </a>
-                    </div>
-                    <div>
-                        <span class="text-primary small"> {{Book.author.name}}</span> <span class="text-danger small">{{Book.price | currency}}</span>
-                        <button class="btn btn-primary btn-xs pull-right" ng-click="AddToCart(Book)">
-                            <span class="fa fa-shopping-cart small"></span>
-                            Buy
+        <div class="row">
+            <div class="col-md-12">
+                <form name="SearchForm" class="form-inline pull-right">
+                    <div class="form-group form-group-sm">
+                        <label for="title" class="control-label">Search By Title</label>
+                        <input type="search" ng-model="Title" id="title" class="form-control input-sm" placeholder="Search By Title" required autofocus />
+                        <button type="button" name="buttonSearch" class="btn btn-primary btn-sm" ng-click="SearchByTitle()">
+                            <i class="fa fa-search"></i> Search
                         </button>
                     </div>
-                    <p>
-                        <rating class="pull-left" ng-model="rate" max="max" readonly="true"></rating>
-                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <ul class="pager" style="padding-left: 15px; padding-right: 15px;text-align: center">
+                <li class="previous" ng-disabled="{{currentIndex === 0}}">
+                    <a ng-href="" href="" ng-click="GetNextBooks('P')"><span class="glyphicon glyphicon-backward"></span> Prev</a>
+                </li>
+                <li class="next">
+                    <a ng-href="" href="" ng-click="GetNextBooks('N')">Next <span class="glyphicon glyphicon-forward"></span></a>
+                </li>
+                <li>
+                    <h4 class="caption"> Popular Books</h4>
+                </li>
+            </ul>
+        </div>
+        <div ng-repeat="Book in localBooks | limitTo : 4" class="animated lightSpeedIn" ng-init="Index = $index">
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail" style="margin-top: 10px">
+                    <a href="" ng-click="GetBookDetails(Book.id)">
+                        <img src="http://placehold.it/200x200/" alt="{{Book.title}}" class="img-rounded img-responsive" />
+                    </a>
+                    <div class="caption">
+                        <div style="overflow: hidden">
+                            <a ng-href="/Books/{{Book.id}}">
+                                <h5>{{Book.title}}</h5>
+                            </a>
+                        </div>
+                        <div>
+                            <span class="text-primary small"> {{Book.author.name}}</span> <span class="text-danger small">{{Book.price | currency}}</span>
+                            <button class="btn btn-primary btn-xs pull-right" ng-click="AddToCart(Book)">
+                                <span class="fa fa-shopping-cart small"></span>
+                                Buy
+                            </button>
+                        </div>
+                        <p>
+                            <rating class="pull-left" ng-model="rate" max="max" readonly="true"></rating>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-

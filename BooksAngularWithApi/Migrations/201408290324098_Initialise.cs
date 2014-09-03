@@ -8,60 +8,18 @@ namespace BooksAngularWithApi.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Author",
+                "dbo.Address",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
+                        AddressID = c.Int(nullable: false, identity: true),
+                        Address1 = c.String(),
+                        Address2 = c.String(),
+                        Suburb = c.String(),
+                        PostCode = c.Int(nullable: false),
+                        State = c.String(),
+                        AddressType = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Book",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Year = c.Int(nullable: false),
-                        Genre = c.String(),
-                        AuthorId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
-                .Index(t => t.AuthorId);
-            
-            CreateTable(
-                "dbo.OrderDetail",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UnitPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Qty = c.Int(nullable: false),
-                        lineTotal = c.Decimal(precision: 18, scale: 2),
-                        OrderId = c.Int(nullable: false),
-                        BookId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
-                .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
-                .Index(t => t.OrderId)
-                .Index(t => t.BookId);
-            
-            CreateTable(
-                "dbo.Review",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Comment = c.String(),
-                        BookId = c.Int(nullable: false),
-                        UserID = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
-                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
-                .Index(t => t.BookId)
-                .Index(t => t.UserID);
+                .PrimaryKey(t => t.AddressID);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -122,17 +80,68 @@ namespace BooksAngularWithApi.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Author",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Book",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Year = c.Int(nullable: false),
+                        Genre = c.String(),
+                        AuthorId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
+                .Index(t => t.AuthorId);
+            
+            CreateTable(
+                "dbo.OrderDetail",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UnitPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Qty = c.Int(nullable: false),
+                        lineTotal = c.Decimal(precision: 18, scale: 2),
+                        OrderId = c.Int(nullable: false),
+                        BookId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
+                .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.BookId);
+            
+            CreateTable(
+                "dbo.Review",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Comment = c.String(),
+                        BookId = c.Int(nullable: false),
+                        UserID = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
+                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
+                .Index(t => t.BookId)
+                .Index(t => t.UserID);
+            
+            CreateTable(
                 "dbo.Order",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         OrderDate = c.DateTime(nullable: false),
                         OrderAmount = c.Decimal(precision: 18, scale: 2),
-                        Address1 = c.String(),
-                        Address2 = c.String(),
-                        Suburb = c.String(),
-                        PostCode = c.Int(nullable: false),
-                        State = c.String(),
                         Comment = c.String(),
                         UserId = c.String(maxLength: 128),
                     })
@@ -150,6 +159,19 @@ namespace BooksAngularWithApi.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.ApplicationUserAddress",
+                c => new
+                    {
+                        ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
+                        Address_AddressID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.ApplicationUser_Id, t.Address_AddressID })
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Address", t => t.Address_AddressID, cascadeDelete: true)
+                .Index(t => t.ApplicationUser_Id)
+                .Index(t => t.Address_AddressID);
+            
         }
         
         public override void Down()
@@ -159,33 +181,39 @@ namespace BooksAngularWithApi.Migrations
             DropForeignKey("dbo.OrderDetail", "OrderId", "dbo.Order");
             DropForeignKey("dbo.Review", "BookId", "dbo.Book");
             DropForeignKey("dbo.Review", "UserID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.OrderDetail", "BookId", "dbo.Book");
+            DropForeignKey("dbo.Book", "AuthorId", "dbo.Author");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.OrderDetail", "BookId", "dbo.Book");
-            DropForeignKey("dbo.Book", "AuthorId", "dbo.Author");
+            DropForeignKey("dbo.ApplicationUserAddress", "Address_AddressID", "dbo.Address");
+            DropForeignKey("dbo.ApplicationUserAddress", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropIndex("dbo.ApplicationUserAddress", new[] { "Address_AddressID" });
+            DropIndex("dbo.ApplicationUserAddress", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Order", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Review", new[] { "UserID" });
             DropIndex("dbo.Review", new[] { "BookId" });
             DropIndex("dbo.OrderDetail", new[] { "BookId" });
             DropIndex("dbo.OrderDetail", new[] { "OrderId" });
             DropIndex("dbo.Book", new[] { "AuthorId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropTable("dbo.ApplicationUserAddress");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Order");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Review");
             DropTable("dbo.OrderDetail");
             DropTable("dbo.Book");
             DropTable("dbo.Author");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Address");
         }
     }
 }
